@@ -239,10 +239,40 @@
         text-shadow: 1px 4px 0 rgb(123, 82, 136);
       }
       .doodle { transform: scale(0.55) !important; }
-      .doodle.partner { transform: none !important; width: 48px !important; }
       .hero-venues {
         font-size: 0.85rem;
         transform: scaleY(0.7) scaleX(0.95);
+      }
+    }
+
+    /* ─── MOBILE PARTNERS ─── */
+    .partners-mobile {
+      display: none;
+    }
+
+    @media (max-width: 768px) {
+      .partners-mobile {
+        position: absolute;
+        bottom: 52px;
+        left: 50%;
+        transform: translateX(-50%);
+        z-index: 20;
+        display: flex;
+        gap: 20px;
+        align-items: center;
+      }
+      .partners-mobile a {
+        display: block;
+        width: 60px;
+        height: 60px;
+      }
+      .partners-mobile img {
+        width: 100%;
+        height: 100%;
+        object-fit: contain;
+      }
+      .doodle.partner {
+        display: none !important;
       }
     }
 
@@ -302,84 +332,84 @@
       <a href="https://qtickets.ru/event/225583" class="qtickets-button">Купить билеты</a>
     </div>
 
-    <!-- TOP ROW -->
-    <div class="doodle depth-2" data-speed="0.3" style="top: 3%; left: 2%; width: 150px;">
+    <!-- TOP ROW — partners separated from doodles -->
+    <div class="doodle depth-2" data-speed="0.3" style="top: 2%; left: 1%; width: 130px;">
       <img src="assets/web/doodle_17.png" alt="">
     </div>
-    <div class="doodle partner" data-speed="0.45" style="top: 4%; left: 14%; width: 230px;">
+    <div class="doodle partner" data-speed="0.45" style="top: 5%; left: 16%; width: 220px;">
       <a href="https://t.me/smena_kazan" target="_blank" style="transform: rotate(-3deg);"><img src="assets/web/smena.png" alt="Смена"></a>
     </div>
-    <div class="doodle depth-1" data-speed="0.55" style="top: 2%; left: 38%; width: 100px;">
+    <div class="doodle depth-1" data-speed="0.55" style="top: 2%; left: 36%; width: 90px;">
       <img src="assets/web/doodle_06.png" alt="">
     </div>
-    <div class="doodle depth-2" data-speed="0.48" style="top: 5%; left: 50%; width: 80px;">
+    <div class="doodle depth-2" data-speed="0.48" style="top: 6%; left: 48%; width: 75px;">
       <img src="assets/web/doodle_g02.png" alt="">
     </div>
-    <div class="doodle depth-3 stretched" data-speed="0.15" style="top: 1%; right: 22%; width: 180px;">
+    <div class="doodle depth-3 stretched" data-speed="0.15" style="top: 1%; right: 24%; width: 160px;">
       <img src="assets/web/doodle_08.png" alt="">
     </div>
-    <div class="doodle depth-1" data-speed="0.42" style="top: 7%; right: 34%; width: 75px;">
+    <div class="doodle depth-1" data-speed="0.42" style="top: 8%; right: 36%; width: 70px;">
       <img src="assets/web/doodle_g09.png" alt="">
     </div>
-    <div class="doodle partner" data-speed="0.5" style="top: 3%; right: 2%; width: 140px;">
+    <div class="doodle partner" data-speed="0.5" style="top: 2%; right: 1%; width: 140px;">
       <a href="https://yandex.com/maps/-/CPVr4M0x" target="_blank" style="transform: rotate(3deg);"><img src="assets/web/fomin.png" alt="Бар Фомин"></a>
     </div>
 
-    <!-- LEFT SIDE — spaced zigzag, pushed wider -->
-    <div class="doodle depth-1" data-speed="0.42" style="top: 16%; left: 10%; width: 120px;">
+    <!-- LEFT SIDE — doodles avoid partner zones -->
+    <div class="doodle depth-1" data-speed="0.42" style="top: 15%; left: 12%; width: 100px;">
       <img src="assets/web/doodle_07.png" alt="">
     </div>
-    <div class="doodle depth-2" data-speed="0.36" style="top: 25%; left: 20%; width: 100px;">
+    <div class="doodle depth-2" data-speed="0.36" style="top: 23%; left: 3%; width: 90px;">
       <img src="assets/web/doodle_g06.png" alt="">
     </div>
-    <div class="doodle partner" data-speed="0.35" style="top: 33%; left: 1%; width: 140px;">
+    <div class="doodle partner" data-speed="0.35" style="top: 30%; left: 14%; width: 140px;">
       <a href="https://t.me/scha_kazan" target="_blank" style="transform: rotate(4deg);"><img src="assets/web/sha.png" alt="Бар Ща"></a>
     </div>
-    <div class="doodle depth-1" data-speed="0.48" style="top: 41%; left: 16%; width: 115px;">
+    <div class="doodle depth-1" data-speed="0.48" style="top: 38%; left: 2%; width: 100px;">
       <img src="assets/web/doodle_12.png" alt="">
     </div>
-    <div class="doodle depth-3 stretched" data-speed="0.2" style="top: 49%; left: 4%; width: 100px;">
+    <div class="doodle depth-3 stretched" data-speed="0.2" style="top: 46%; left: 15%; width: 90px;">
       <img src="assets/web/doodle_19.png" alt="">
     </div>
-    <div class="doodle depth-2" data-speed="0.44" style="top: 56%; left: 18%; width: 95px;">
+    <div class="doodle depth-2" data-speed="0.44" style="top: 53%; left: 3%; width: 85px;">
       <img src="assets/web/doodle_11.png" alt="">
     </div>
-    <div class="doodle depth-1" data-speed="0.36" style="top: 64%; left: 4%; width: 90px;">
+    <div class="doodle depth-1" data-speed="0.36" style="top: 61%; left: 14%; width: 80px;">
       <img src="assets/web/doodle_g04.png" alt="">
     </div>
-    <div class="doodle depth-3 stretched" data-speed="0.22" style="top: 71%; left: 16%; width: 100px;">
+    <div class="doodle depth-3 stretched" data-speed="0.22" style="top: 69%; left: 2%; width: 90px;">
       <img src="assets/web/doodle_g07.png" alt="">
     </div>
-    <div class="doodle depth-2" data-speed="0.4" style="top: 78%; left: 2%; width: 85px;">
+    <div class="doodle depth-2" data-speed="0.4" style="top: 77%; left: 13%; width: 80px;">
       <img src="assets/web/doodle_g10.png" alt="">
     </div>
 
-    <!-- RIGHT SIDE — spaced zigzag, pushed wider -->
-    <div class="doodle depth-1" data-speed="0.44" style="top: 16%; right: 11%; width: 115px;">
+    <!-- RIGHT SIDE — doodles avoid partner zones -->
+    <div class="doodle depth-1" data-speed="0.44" style="top: 15%; right: 13%; width: 100px;">
       <img src="assets/web/doodle_18.png" alt="">
     </div>
-    <div class="doodle depth-2" data-speed="0.34" style="top: 25%; right: 20%; width: 100px;">
+    <div class="doodle depth-2" data-speed="0.34" style="top: 23%; right: 2%; width: 90px;">
       <img src="assets/web/doodle_g03.png" alt="">
     </div>
-    <div class="doodle depth-3 stretched" data-speed="0.18" style="top: 33%; right: 3%; width: 105px;">
+    <div class="doodle depth-3 stretched" data-speed="0.18" style="top: 30%; right: 15%; width: 95px;">
       <img src="assets/web/doodle_15.png" alt="">
     </div>
-    <div class="doodle depth-1" data-speed="0.46" style="top: 41%; right: 15%; width: 110px;">
+    <div class="doodle depth-1" data-speed="0.46" style="top: 38%; right: 2%; width: 100px;">
       <img src="assets/web/doodle_13.png" alt="">
     </div>
-    <div class="doodle partner" data-speed="0.4" style="top: 49%; right: 1%; width: 140px;">
+    <div class="doodle partner" data-speed="0.4" style="top: 46%; right: 12%; width: 140px;">
       <a href="https://t.me/moscowmarketkzn" target="_blank" style="transform: rotate(-3deg);"><img src="assets/web/moscow.png" alt="Московский рынок"></a>
     </div>
-    <div class="doodle depth-2" data-speed="0.3" style="top: 56%; right: 16%; width: 100px;">
+    <div class="doodle depth-2" data-speed="0.3" style="top: 53%; right: 2%; width: 90px;">
       <img src="assets/web/doodle_14.png" alt="">
     </div>
-    <div class="doodle depth-1" data-speed="0.38" style="top: 64%; right: 6%; width: 85px;">
+    <div class="doodle depth-1" data-speed="0.38" style="top: 61%; right: 14%; width: 80px;">
       <img src="assets/web/doodle_g08.png" alt="">
     </div>
-    <div class="doodle depth-3 stretched" data-speed="0.24" style="top: 71%; right: 18%; width: 95px;">
+    <div class="doodle depth-3 stretched" data-speed="0.24" style="top: 69%; right: 2%; width: 85px;">
       <img src="assets/web/doodle_g11.png" alt="">
     </div>
-    <div class="doodle depth-2" data-speed="0.42" style="top: 78%; right: 3%; width: 85px;">
+    <div class="doodle depth-2" data-speed="0.42" style="top: 77%; right: 14%; width: 80px;">
       <img src="assets/web/doodle_g14.png" alt="">
     </div>
 
@@ -410,6 +440,13 @@
     </div>
     <div class="doodle depth-1" data-speed="0.35" style="bottom: 3%; right: 1%; width: 80px;">
       <img src="assets/web/doodle_09.png" alt="">
+    </div>
+
+    <div class="partners-mobile">
+      <a href="https://t.me/smena_kazan" target="_blank"><img src="assets/web/smena.png" alt="Смена"></a>
+      <a href="https://yandex.com/maps/-/CPVr4M0x" target="_blank"><img src="assets/web/fomin.png" alt="Фомин"></a>
+      <a href="https://t.me/scha_kazan" target="_blank"><img src="assets/web/sha.png" alt="Ща"></a>
+      <a href="https://t.me/moscowmarketkzn" target="_blank"><img src="assets/web/moscow.png" alt="Московский рынок"></a>
     </div>
 
     <div class="socials">
