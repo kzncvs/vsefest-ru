@@ -67,6 +67,9 @@
     .hero-date {
       position: relative;
       z-index: 10;
+      display: inline-flex;
+      align-items: center;
+      gap: 12px;
       font-family: 'Arial Black', 'Arial', sans-serif;
       font-weight: 900;
       font-size: clamp(2.5rem, 6vw, 5rem);
@@ -76,6 +79,18 @@
       letter-spacing: 2px;
       transform: scaleX(1.5);
       white-space: nowrap;
+    }
+
+    .date-quote {
+      width: clamp(24px, 3.5vw, 42px);
+      height: auto;
+      opacity: 0.7;
+    }
+    .date-quote.left {
+      transform: translateY(-4px);
+    }
+    .date-quote.right {
+      transform: translateY(4px);
     }
 
     /* ─── CITY ─── */
@@ -328,7 +343,11 @@
       <img class="letters-img" src="assets/web/hero_letters.png" alt="ВСЕ">
     </div>
 
-    <div class="hero-date">21–24 мая</div>
+    <div class="hero-date">
+      <img class="date-quote left" src="assets/web/quote_left.png" alt="">
+      21–24 мая
+      <img class="date-quote right" src="assets/web/quote_right.png" alt="">
+    </div>
     <div class="hero-city">Казань</div>
 
     <div class="hero-venues">Смена <b>Бар «Фомин»</b> <span class="star">****</span> <b>Бар «Ща»</b><br><span class="star">**** *******</span> <b>Московский рынок</b> <span class="star">********** ****</span></div>
