@@ -74,16 +74,16 @@
     .hero-venues {
       position: relative;
       z-index: 10;
-      width: min(85vw, 800px);
+      width: min(90vw, 820px);
       font-family: 'Calibri', 'Gill Sans', 'Trebuchet MS', sans-serif;
       font-weight: 700;
-      font-size: clamp(1.1rem, 2.8vw, 2rem);
+      font-size: clamp(1.2rem, 3vw, 2.2rem);
       color: rgb(1, 0, 1);
       line-height: 1.4;
       text-align: justify;
       text-align-last: justify;
-      transform: scaleY(0.7);
-      margin: -8px 0;
+      transform: scaleY(0.65) scaleX(0.9);
+      margin: -12px 0;
     }
 
     /* ─── TICKETS BUTTON ─── */
@@ -155,41 +155,6 @@
     .doodle.stretched { filter: blur(1.5px); opacity: 0; }
     .doodle.stretched.visible { opacity: 0.35; }
 
-    /* ─── SCROLL INDICATOR ─── */
-    .scroll-hint {
-      position: absolute;
-      bottom: 32px;
-      left: 50%;
-      transform: translateX(-50%);
-      z-index: 20;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      gap: 6px;
-      opacity: 0.4;
-      animation: bounce 2s ease infinite;
-    }
-
-    .scroll-hint span {
-      font-size: 11px;
-      letter-spacing: 3px;
-      text-transform: uppercase;
-      color: var(--purple);
-      font-weight: 500;
-    }
-
-    .scroll-hint .arrow {
-      width: 20px;
-      height: 20px;
-      border-right: 2px solid var(--purple);
-      border-bottom: 2px solid var(--purple);
-      transform: rotate(45deg);
-    }
-
-    @keyframes bounce {
-      0%, 100% { transform: translateX(-50%) translateY(0); }
-      50% { transform: translateX(-50%) translateY(10px); }
-    }
 
     /* ─── LARGE SCREENS ─── */
     @media (min-width: 1400px) {
@@ -221,13 +186,6 @@
       .doodle { transform: scale(0.55) !important; }
     }
 
-    /* ─── FOOTER ─── */
-    footer {
-      text-align: center;
-      padding: 32px;
-      font-size: 0.8rem;
-      color: #bbb;
-    }
   </style>
 </head>
 <body>
@@ -240,7 +198,7 @@
 
     <div class="hero-date">21–24 мая</div>
 
-    <div class="hero-venues">Смена Бар&nbsp;«Фомин» Угол Бар&nbsp;«Ща» Библиотека Московский&nbsp;рынок Rebor</div>
+    <div class="hero-venues">Смена Бар&nbsp;«Фомин» **** Бар&nbsp;«Ща»<br>**** ******* Московский&nbsp;рынок ********** ****</div>
 
     <div class="hero-cta">
       <span class="ticket-label">Купить билеты</span>
@@ -306,13 +264,8 @@
       <img src="assets/web/doodle_09.png" alt="">
     </div>
 
-    <div class="scroll-hint">
-      <span>scroll</span>
-      <div class="arrow"></div>
-    </div>
   </section>
 
-  <footer>ФЕСТ ВСЕ 2026</footer>
 
   <script type="text/javascript" src="https://cdn.qtickets.tech/openapi.js"></script>
 
@@ -340,9 +293,6 @@
         const s = 1 + scrollY * 0.00008;
         heroLogo.style.transform = `translateY(${scrollY * 0.08}px) scale(${s})`;
       }
-
-      const hint = document.querySelector('.scroll-hint');
-      if (hint) hint.style.opacity = Math.max(0, 0.4 - scrollY / 300);
 
       ticking = false;
     }
