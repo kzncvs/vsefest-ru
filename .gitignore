@@ -3,3 +3,6 @@
 __pycache__/
 assets/layers/
 *.pyc
+*.psd
+main.py
+Screenshot*
