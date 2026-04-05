@@ -37,15 +37,27 @@
     .hero {
       position: relative;
       width: 100%;
-      height: 100vh;
-      min-height: 600px;
+      min-height: 100vh;
       display: flex;
       flex-direction: column;
       align-items: center;
       justify-content: center;
       gap: clamp(12px, 2.5vh, 32px);
-      overflow-x: hidden;
-      overflow-y: hidden;
+      overflow: visible;
+      padding: 24px 0;
+    }
+
+    /* ─── SUBTITLE ─── */
+    .hero-subtitle {
+      position: relative;
+      z-index: 10;
+      font-family: 'Calibri', 'Gill Sans', 'Trebuchet MS', sans-serif;
+      font-weight: 700;
+      font-size: clamp(1.2rem, 3vw, 2.2rem);
+      color: rgb(1, 0, 1);
+      line-height: 1.4;
+      transform: scaleY(0.65) scaleX(0.9);
+      margin-bottom: -24px;
     }
 
     /* ─── LOGO COMPOSITE ─── */
@@ -279,6 +291,20 @@
       }
     }
 
+    /* ─── SHORT VIEWPORTS ─── */
+    @media (max-height: 780px) {
+      .hero { gap: clamp(4px, 1vh, 12px); }
+      .hero-logo { width: min(50vw, 420px) !important; }
+      .hero-date { transform: scale(1.3); }
+      .hero-subtitle { margin-bottom: -16px; }
+    }
+
+    @media (max-height: 620px) {
+      .hero-logo { width: min(45vw, 320px) !important; }
+      .hero-date { transform: scale(1.1); }
+      .hero-subtitle { font-size: 0.8rem; margin-bottom: -10px; }
+    }
+
     /* ─── MOBILE PARTNERS ─── */
     .partners-mobile {
       display: none;
@@ -286,10 +312,7 @@
 
     @media (max-width: 768px) {
       .partners-mobile {
-        position: absolute;
-        bottom: 36px;
-        left: 50%;
-        transform: translateX(-50%);
+        position: relative;
         z-index: 20;
         display: flex;
         gap: 16px;
@@ -299,9 +322,6 @@
         display: block;
         width: 50px;
         height: 50px;
-      }
-      .socials {
-        bottom: 10px !important;
       }
       .partners-mobile img {
         width: 100%;
@@ -315,10 +335,7 @@
 
     /* ─── SOCIALS ─── */
     .socials {
-      position: absolute;
-      bottom: 24px;
-      left: 50%;
-      transform: translateX(-50%);
+      position: relative;
       z-index: 20;
       display: flex;
       gap: 32px;
@@ -343,7 +360,6 @@
     @media (max-width: 768px) {
       .socials {
         gap: 20px;
-        bottom: 16px;
       }
       .socials a {
         font-size: 0.75rem;
@@ -355,6 +371,7 @@
 
   <!-- ═══ HERO ═══ -->
   <section class="hero" id="hero">
+    <div class="hero-subtitle">Независимый музыкальный фестиваль</div>
     <div class="hero-logo">
       <img class="letters-img" src="assets/web/hero_letters.png" alt="ВСЕ">
     </div>
@@ -374,25 +391,25 @@
     </div>
 
     <!-- TOP ROW -->
-    <div class="doodle depth-2" data-speed="0.3" style="top: 2%; left: 1%; width: 120px;">
+    <div class="doodle depth-2" data-speed="0.3" style="top: 1%; left: 1%; width: 100px;">
       <img src="assets/web/doodle_17.png" alt="">
     </div>
-    <div class="doodle partner" data-speed="0.45" style="top: 4%; left: 14%; width: 200px;">
+    <div class="doodle partner" data-speed="0.45" style="top: 1%; left: 12%; width: 180px;">
       <a href="https://t.me/smena_kazan" target="_blank" style="transform: rotate(-3deg);"><img src="assets/web/smena.png" alt="Смена"></a>
     </div>
-    <div class="doodle depth-1" data-speed="0.55" style="top: 2%; left: 35%; width: 85px;">
+    <div class="doodle depth-1" data-speed="0.55" style="top: 1%; left: 35%; width: 75px;">
       <img src="assets/web/doodle_06.png" alt="">
     </div>
-    <div class="doodle depth-2" data-speed="0.48" style="top: 7%; left: 46%; width: 70px;">
+    <div class="doodle depth-2" data-speed="0.48" style="top: 1%; left: 46%; width: 65px;">
       <img src="assets/web/doodle_g02.png" alt="">
     </div>
-    <div class="doodle depth-3 stretched" data-speed="0.15" style="top: 1%; right: 26%; width: 140px;">
+    <div class="doodle depth-3 stretched" data-speed="0.15" style="top: 1%; right: 26%; width: 120px;">
       <img src="assets/web/doodle_08.png" alt="">
     </div>
-    <div class="doodle depth-1" data-speed="0.42" style="top: 8%; right: 38%; width: 65px;">
+    <div class="doodle depth-1" data-speed="0.42" style="top: 1%; right: 38%; width: 60px;">
       <img src="assets/web/doodle_g09.png" alt="">
     </div>
-    <div class="doodle partner" data-speed="0.5" style="top: 2%; right: 1%; width: 130px;">
+    <div class="doodle partner" data-speed="0.5" style="top: 1%; right: 1%; width: 120px;">
       <a href="https://yandex.com/maps/-/CPVr4M0x" target="_blank" style="transform: rotate(3deg);"><img src="assets/web/fomin.png" alt="Бар Фомин"></a>
     </div>
 
