@@ -2,6 +2,7 @@
 .idea/
 __pycache__/
 assets/layers/
+assets/.image_backups/
 *.pyc
 *.psd
 main.py
