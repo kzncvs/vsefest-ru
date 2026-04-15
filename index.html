@@ -197,11 +197,12 @@
     }
 
     .hero-artists .ftnote {
-      width: 0.7em;
-      height: 0.7em;
+      width: 0.35em;
+      height: 0.35em;
       vertical-align: super;
       margin-left: 1px;
       object-fit: contain;
+      transform: scaleY(1.43) scaleX(1.09);
     }
 
     /* ─── NEWS NOTICE ─── */
@@ -443,6 +444,12 @@
         text-shadow: 0px 4px 0px rgba(120, 84, 137, 0.35);
       }
       .doodle { transform: scale(0.55) !important; }
+      .doodle:not(.partner)[style*="left:"] {
+        transform: scale(0.45) translateX(-14vw) translateY(6vh) !important;
+      }
+      .doodle:not(.partner)[style*="right:"] {
+        transform: scale(0.45) translateX(14vw) translateY(6vh) !important;
+      }
       .hero-venues {
         font-size: clamp(0.7rem, 3.7vw, 0.85rem);
         transform: scaleY(0.7) scaleX(0.95);
@@ -571,10 +578,24 @@
       21–24 мая
     </div>
 
-    <div class="hero-section-label"><img class="label-quote left" src="assets/web/quote_left.png" alt="">Первая волна<img class="label-quote right" src="assets/web/quote_right.png" alt=""></div>
+    <div class="hero-section-label"><img class="label-quote left" src="assets/web/quote_left.png" alt="">Артисты<img class="label-quote right" src="assets/web/quote_right.png" alt=""></div>
 
     <div class="hero-artists">
       <div class="artist-row">
+        <span><b>Гловертаун</b><img class="ftnote" src="assets/web/icon_speech.png" alt=""></span>
+        <span><b>Признаки ранней весны</b><img class="ftnote" src="assets/web/icon_note.png" alt=""></span>
+        <span><b>Мерцание</b><img class="ftnote" src="assets/web/icon_kzn.png" alt=""></span>
+      </div>
+      <div class="artist-row">
+        <span><b>Один в оленьем парке</b><img class="ftnote" src="assets/web/icon_spiral.png" alt=""></span>
+        <span><b>падение дома ашеров</b><img class="ftnote" src="assets/web/icon_kzn.png" alt=""></span>
+      </div>
+      <div class="artist-row">
+        <span><b>Рыцарь диких яблок</b><img class="ftnote" src="assets/web/icon_bam.png" alt=""></span>
+        <span><b>Фасад</b><img class="ftnote" src="assets/web/icon_cloud.png" alt=""></span>
+        <span><b>Час до утра</b><img class="ftnote" src="assets/web/icon_cloud.png" alt=""></span>
+      </div>
+      <div class="artist-row" style="margin-top: 0.6em;">
         <span>11:11<img class="ftnote" src="assets/web/icon_nn.png" alt=""></span>
         <span><b>дом номер семнадцать</b><img class="ftnote" src="assets/web/icon_yo.png" alt=""></span>
         <span><b>Луговые Мари</b><img class="ftnote" src="assets/web/icon_msk.png" alt=""></span>
@@ -596,12 +617,12 @@
         <span><img class="city-icon" src="assets/web/icon_msk.png" alt="">&nbsp;<b>Москва</b></span>
         <span><img class="city-icon" src="assets/web/icon_kzn.png" alt="">&nbsp;<b>Казань</b></span>
       </div>
-      <div class="hero-cities placeholders">
-        <span><img class="city-icon" src="assets/web/icon_cloud.png" alt=""> <span class="star">******</span></span>
-        <span><img class="city-icon" src="assets/web/icon_spiral.png" alt=""> <span class="star">********</span></span>
-        <span><img class="city-icon" src="assets/web/icon_speech.png" alt=""> <span class="star">***</span></span>
-        <span><img class="city-icon" src="assets/web/icon_bam.png" alt=""> <span class="star">****************</span></span>
-        <span><img class="city-icon" src="assets/web/icon_note.png" alt=""> <span class="star">*****************</span></span>
+      <div class="hero-cities">
+        <span><img class="city-icon" src="assets/web/icon_cloud.png" alt="">&nbsp;<b>Ижевск</b></span>
+        <span><img class="city-icon" src="assets/web/icon_spiral.png" alt="">&nbsp;<b>Чебоксары</b></span>
+        <span><img class="city-icon" src="assets/web/icon_speech.png" alt="">&nbsp;<b>Уфа</b></span>
+        <span><img class="city-icon" src="assets/web/icon_bam.png" alt="">&nbsp;<b>Санкт-Петербург</b></span>
+        <span><img class="city-icon" src="assets/web/icon_note.png" alt="">&nbsp;<b>Ростов-на-Дону</b></span>
       </div>
     </div>
 
@@ -664,7 +685,7 @@
     <div class="doodle partner" data-speed="0.35" style="top: 32%; left: 2%; width: 130px;">
       <a href="https://t.me/scha_kazan" target="_blank" style="transform: rotate(4deg);"><img src="assets/web/sha.png" alt="Бар Ща" loading="lazy" decoding="async"></a>
     </div>
-    <div class="doodle depth-1" data-speed="0.48" style="top: 40%; left: 15%; width: 190px;">
+    <div class="doodle depth-1" data-speed="0.48" style="top: 45%; left: 15%; width: 190px;">
       <img src="assets/web/doodle_07.png" alt="" loading="lazy" decoding="async">
     </div>
     <div class="doodle depth-3 stretched" data-speed="0.2" style="top: 48%; left: 2%; width: 80px;">
