@@ -176,10 +176,11 @@
       z-index: 25;
       display: flex;
       flex-direction: column;
-      width: min(90vw, 820px);
+      gap: 0.35em;
+      width: min(94vw, 1240px);
       font-family: 'Calibri', 'Gill Sans', 'Trebuchet MS', sans-serif;
       font-weight: 700;
-      font-size: clamp(1.3rem, 3vw, 2.3rem);
+      font-size: clamp(1.05rem, 2.1vw, 1.75rem);
       color: rgb(1, 0, 1);
       line-height: 1.4;
       transform: scaleY(0.7) scaleX(0.92);
@@ -187,9 +188,16 @@
 
     .hero-artists .artist-row {
       display: flex;
+      flex-wrap: wrap;
       justify-content: space-between;
       align-items: baseline;
+      column-gap: 0.5em;
+      row-gap: 0.2em;
       width: 100%;
+    }
+
+    .hero-artists .artist-row > span {
+      white-space: nowrap;
     }
 
     .hero-artists b {
@@ -456,7 +464,20 @@
         transform: scaleY(0.7) scaleX(0.95);
       }
       .hero-artists {
-        font-size: clamp(0.72rem, 3.8vw, 0.88rem);
+        font-size: min(2.4vw, 1rem);
+        width: 96vw;
+        gap: 0.45em;
+      }
+      .hero-artists .artist-row {
+        display: block;
+        text-align: justify;
+        text-align-last: justify;
+        column-gap: 0;
+        row-gap: 0;
+        line-height: 1.6;
+      }
+      .hero-artists .artist-row > span {
+        display: inline-block;
       }
       .hero-subtitle {
         font-size: clamp(1rem, 5vw, 1.2rem);
@@ -583,29 +604,43 @@
 
     <div class="hero-artists">
       <div class="artist-row">
-        <span><b>Гловертаун</b><img class="ftnote" src="assets/web/icon_speech.png" alt=""></span>
-        <span><b>Признаки ранней весны</b><img class="ftnote" src="assets/web/icon_note.png" alt=""></span>
-        <span><b>Мерцание</b><img class="ftnote" src="assets/web/icon_kzn.png" alt=""></span>
+        <span><b>амперметр</b><img class="ftnote" src="assets/web/icon_kzn.png" alt=""></span>
+        <span><b>Ваш Паникёр</b><img class="ftnote" src="assets/web/icon_kzn.png" alt=""></span>
+        <span><b>Жарок</b><img class="ftnote" src="assets/web/icon_bam.png" alt=""></span>
+        <span><b>моя подавленная агрессия</b><img class="ftnote" src="assets/web/icon_kzn.png" alt=""></span>
       </div>
       <div class="artist-row">
+        <span><b>МС Каршы</b><img class="ftnote" src="assets/web/icon_kzn.png" alt=""></span>
+        <span><b>пляжные цветы</b><img class="ftnote" src="assets/web/icon_msk.png" alt=""></span>
+        <span><b>суперпечаль :(</b><img class="ftnote" src="assets/web/icon_kzn.png" alt=""></span>
+        <span><b>Тимур Птахин</b><img class="ftnote" src="assets/web/icon_kzn.png" alt=""></span>
+      </div>
+      <div class="artist-row">
+        <span><b>Dainty</b><img class="ftnote" src="assets/web/icon_kzn.png" alt=""></span>
+        <span><b>Holofonote</b><img class="ftnote" src="assets/web/icon_kzn.png" alt=""></span>
+        <span><b>post-dukes</b><img class="ftnote" src="assets/web/icon_cloud.png" alt=""></span>
+        <span><b>Taraf</b><img class="ftnote" src="assets/web/icon_kzn.png" alt=""></span>
+        <span><b>Please Tokyo this is Tokyo</b><img class="ftnote" src="assets/web/icon_bam.png" alt=""></span>
+      </div>
+      <div class="artist-row" style="margin-top: 0.6em;">
+        <span><b>11:11</b><img class="ftnote" src="assets/web/icon_nn.png" alt=""></span>
+        <span><b>Гловертаун</b><img class="ftnote" src="assets/web/icon_speech.png" alt=""></span>
+        <span><b>дом номер семнадцать</b><img class="ftnote" src="assets/web/icon_yo.png" alt=""></span>
+        <span><b>Луговые Мари</b><img class="ftnote" src="assets/web/icon_msk.png" alt=""></span>
+        <span><b>метеосводка</b><img class="ftnote" src="assets/web/icon_kzn.png" alt=""></span>
+      </div>
+      <div class="artist-row">
+        <span><b>Признаки ранней весны</b><img class="ftnote" src="assets/web/icon_note.png" alt=""></span>
+        <span><b>Мерцание</b><img class="ftnote" src="assets/web/icon_kzn.png" alt=""></span>
         <span><b>Один в оленьем парке</b><img class="ftnote" src="assets/web/icon_spiral.png" alt=""></span>
         <span><b>падение дома ашеров</b><img class="ftnote" src="assets/web/icon_kzn.png" alt=""></span>
       </div>
       <div class="artist-row">
+        <span><b>равноденствие</b><img class="ftnote" src="assets/web/icon_msk.png" alt=""></span>
         <span><b>Рыцарь диких яблок</b><img class="ftnote" src="assets/web/icon_bam.png" alt=""></span>
+        <span><b>Толмачи</b><img class="ftnote" src="assets/web/icon_kzn.png" alt=""></span>
         <span><b>Фасад</b><img class="ftnote" src="assets/web/icon_cloud.png" alt=""></span>
         <span><b>Час до утра</b><img class="ftnote" src="assets/web/icon_cloud.png" alt=""></span>
-      </div>
-      <div class="artist-row" style="margin-top: 0.6em;">
-        <span>11:11<img class="ftnote" src="assets/web/icon_nn.png" alt=""></span>
-        <span><b>дом номер семнадцать</b><img class="ftnote" src="assets/web/icon_yo.png" alt=""></span>
-        <span><b>Луговые Мари</b><img class="ftnote" src="assets/web/icon_msk.png" alt=""></span>
-      </div>
-      <div class="artist-row">
-        <span>метеосводка<img class="ftnote" src="assets/web/icon_kzn.png" alt=""></span>
-        <span><b>Пайта</b><img class="ftnote" src="assets/web/icon_msk.png" alt=""></span>
-        <span>равноденствие<img class="ftnote" src="assets/web/icon_msk.png" alt=""></span>
-        <span><b>Толмачи</b><img class="ftnote" src="assets/web/icon_kzn.png" alt=""></span>
       </div>
     </div>
 
@@ -807,6 +842,42 @@
       const dur = 3 + Math.random() * 4;
       const del = Math.random() * 3;
       d.style.animation = `f${i % 3} ${dur}s ${del}s ease-in-out infinite`;
+    });
+
+    // Dynamically shrink artists font so no row wraps
+    function fitArtists() {
+      const container = document.querySelector('.hero-artists');
+      if (!container) return;
+      const rows = Array.from(container.querySelectorAll('.artist-row'));
+      if (!rows.length) return;
+
+      container.style.fontSize = '';
+      const containerWidth = container.clientWidth;
+      const baseFontSize = parseFloat(getComputedStyle(container).fontSize);
+
+      const originals = rows.map(r => r.style.whiteSpace);
+      rows.forEach(r => { r.style.whiteSpace = 'nowrap'; });
+      let maxNatural = 0;
+      rows.forEach(r => { maxNatural = Math.max(maxNatural, r.scrollWidth); });
+      rows.forEach((r, i) => { r.style.whiteSpace = originals[i]; });
+
+      if (maxNatural > containerWidth) {
+        const scale = containerWidth / maxNatural;
+        const newSize = baseFontSize * scale * 0.99;
+        container.style.fontSize = newSize.toFixed(2) + 'px';
+      }
+    }
+
+    if (document.fonts && document.fonts.ready) {
+      document.fonts.ready.then(fitArtists);
+    } else {
+      window.addEventListener('load', fitArtists);
+    }
+    window.addEventListener('load', fitArtists);
+    let _fitTimer;
+    window.addEventListener('resize', () => {
+      clearTimeout(_fitTimer);
+      _fitTimer = setTimeout(fitArtists, 60);
     });
   </script>
 </body>
