@@ -558,6 +558,275 @@
         font-size: 0.75rem;
       }
     }
+
+    /* ─── SCHEDULE ─── */
+    .schedule {
+      position: relative;
+      z-index: 25;
+      width: min(94vw, 1240px);
+      margin-top: clamp(20px, 3vh, 36px);
+    }
+
+    .schedule-tabs {
+      display: flex;
+      justify-content: center;
+      gap: 10px;
+      flex-wrap: wrap;
+      margin-bottom: clamp(20px, 3vh, 36px);
+    }
+
+    .schedule-tab {
+      font-family: 'Calibri', 'Gill Sans', 'Trebuchet MS', sans-serif;
+      font-weight: 700;
+      font-size: clamp(0.9rem, 1.4vw, 1.1rem);
+      padding: 8px 22px;
+      border: 2px solid var(--blue);
+      background: transparent;
+      cursor: pointer;
+      border-radius: 100px;
+      color: var(--blue);
+      transition: background 0.25s ease, color 0.25s ease, transform 0.15s ease;
+      letter-spacing: 0.3px;
+    }
+
+    .schedule-tab:hover {
+      background: rgba(123, 175, 212, 0.18);
+    }
+
+    .schedule-tab.active {
+      background: var(--blue);
+      color: white;
+    }
+
+    .schedule-tab:active { transform: scale(0.97); }
+
+    .schedule-tab .tab-compact { display: none; }
+
+    @media (max-width: 600px) {
+      .schedule-tabs { gap: 6px; }
+      .schedule-tab {
+        padding: 6px 14px;
+        font-size: 0.85rem;
+        letter-spacing: 0.2px;
+      }
+      .schedule-tab .tab-full { display: none; }
+      .schedule-tab .tab-compact { display: inline; }
+    }
+
+    .schedule-day { display: none; }
+    .schedule-day.active { display: block; }
+
+    .schedule-day-title {
+      font-family: 'Arial Black', 'Arial', sans-serif;
+      font-weight: 900;
+      font-size: clamp(1.6rem, 4vw, 3rem);
+      color: rgb(0, 0, 0);
+      text-align: center;
+      margin-bottom: clamp(28px, 4vh, 56px);
+      letter-spacing: 1px;
+      text-shadow: 0 3px 0 rgba(120, 84, 137, 0.4);
+    }
+
+    .schedule-grid {
+      display: grid;
+      grid-template-columns: 56px 1fr 56px;
+      grid-template-rows: auto auto;
+      column-gap: 0;
+      row-gap: 14px;
+      --px-per-min: 1.6px;
+    }
+
+    .stage-headers-row {
+      grid-column: 2;
+      grid-row: 1;
+      display: flex;
+      gap: clamp(8px, 1.5vw, 18px);
+    }
+
+    .stage-header {
+      flex: 1;
+      min-width: 0;
+      text-align: center;
+    }
+
+    .stage-name {
+      font-family: 'Calibri', 'Gill Sans', 'Trebuchet MS', sans-serif;
+      font-weight: 700;
+      font-size: clamp(1.05rem, 1.8vw, 1.5rem);
+      color: rgb(0, 0, 0);
+    }
+
+    .stage-venue {
+      font-family: 'Calibri', 'Gill Sans', 'Trebuchet MS', sans-serif;
+      font-style: italic;
+      font-weight: 700;
+      font-size: clamp(0.8rem, 1.15vw, 1rem);
+      color: rgba(0, 0, 0, 0.55);
+      margin-top: 2px;
+    }
+
+    .time-axis {
+      position: relative;
+      height: calc(var(--day-mins) * var(--px-per-min));
+    }
+    .time-axis-left  { grid-column: 1; grid-row: 2; }
+    .time-axis-right { grid-column: 3; grid-row: 2; }
+
+    .hour-label {
+      position: absolute;
+      top: calc(var(--m) * var(--px-per-min));
+      transform: translateY(-50%);
+      font-family: 'Calibri', sans-serif;
+      font-weight: 700;
+      font-size: clamp(0.75rem, 1vw, 0.95rem);
+      color: var(--blue);
+      white-space: nowrap;
+      user-select: none;
+    }
+    .time-axis-left  .hour-label { left: 0; }
+    .time-axis-right .hour-label { right: 0; }
+
+    .schedule-stages {
+      grid-column: 2;
+      grid-row: 2;
+      position: relative;
+      display: flex;
+      gap: clamp(8px, 1.5vw, 18px);
+      height: calc(var(--day-mins) * var(--px-per-min));
+    }
+
+    .hour-line {
+      position: absolute;
+      left: 0; right: 0;
+      top: calc(var(--m) * var(--px-per-min));
+      border-top: 1px dashed rgba(123, 175, 212, 0.45);
+      pointer-events: none;
+    }
+
+    .stage {
+      flex: 1;
+      position: relative;
+      min-width: 0;
+    }
+
+    .slot {
+      position: absolute;
+      left: 0; right: 0;
+      top: calc(var(--start) * var(--px-per-min));
+      height: calc(var(--dur) * var(--px-per-min));
+      background: var(--slot-fill);
+      border-top: 2.5px solid var(--slot-stroke);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 16px 8px 8px;
+      font-family: 'Calibri', 'Gill Sans', 'Trebuchet MS', sans-serif;
+      font-weight: 700;
+      font-size: clamp(0.8rem, 1.15vw, 1rem);
+      color: var(--slot-text, rgb(0, 0, 0));
+      line-height: 1.2;
+    }
+
+    .slot-time {
+      position: absolute;
+      top: 0;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      background: white;
+      color: rgb(0, 0, 0);
+      border: 1.5px solid rgb(0, 0, 0);
+      border-radius: 6px;
+      padding: 1px 9px;
+      font-family: 'Arial Black', sans-serif;
+      font-weight: 900;
+      font-size: clamp(0.7rem, 1vw, 0.85rem);
+      letter-spacing: 0.4px;
+      white-space: nowrap;
+    }
+
+    .slot-artist {
+      word-break: break-word;
+      hyphens: auto;
+    }
+
+    /* Stage colors mapped to social-media palette */
+    .stage-blue   { --slot-fill: #bbd5e6; --slot-stroke: var(--purple); --slot-text: rgb(0, 0, 0); }
+    .stage-purple { --slot-fill: #a98eb6; --slot-stroke: var(--purple); --slot-text: white;        }
+    .stage-green  { --slot-fill: #cee374; --slot-stroke: var(--red);    --slot-text: rgb(0, 0, 0); }
+    .stage-red    { --slot-fill: #ecc1b8; --slot-stroke: var(--red);    --slot-text: rgb(0, 0, 0); }
+
+    .stage-header-mobile { display: none; }
+
+    @media (max-width: 768px) {
+      .schedule { width: 96vw; }
+      .schedule-day-scroll {
+        overflow-x: auto;
+        -webkit-overflow-scrolling: touch;
+        scrollbar-width: none;
+        padding-bottom: 10px;
+      }
+      .schedule-day-scroll::-webkit-scrollbar { display: none; }
+      .schedule-grid {
+        grid-template-columns: 36px 1fr;
+        column-gap: 0;
+        --px-per-min: 1.6px;
+      }
+      .schedule-stages { gap: 8px; }
+      .stage-headers-row { gap: 8px; }
+      .stage {
+        min-width: 105px;
+        flex: 1 0 105px;
+      }
+      .time-axis-left {
+        position: sticky;
+        left: 0;
+        z-index: 3;
+        background: var(--bg);
+        padding-right: 4px;
+      }
+      .time-axis-right { display: none; }
+      .stage-name { font-size: 0.95rem; }
+      .stage-venue { font-size: 0.78rem; }
+      .hour-label { font-size: 0.7rem; }
+      .slot {
+        font-size: 0.78rem;
+        padding: 14px 5px 5px;
+      }
+      .slot-time {
+        font-size: 0.65rem;
+        padding: 1px 7px;
+        border-width: 1.2px;
+      }
+    }
+
+    @media (max-width: 1100px) and (min-width: 769px) {
+      .schedule-grid { --px-per-min: 1.4px; }
+      .slot { font-size: 0.9rem; }
+    }
+
+    /* ─── TICKETS HINT ─── */
+    .tickets-hint {
+      position: relative;
+      z-index: 25;
+      font-family: 'Calibri', 'Gill Sans', 'Trebuchet MS', sans-serif;
+      font-weight: 700;
+      font-size: clamp(1.3rem, 3vw, 2.3rem);
+      color: rgb(1, 0, 1);
+      text-align: center;
+      transform: scaleY(0.7) scaleX(0.92);
+      margin-top: clamp(24px, 4.5vh, 56px);
+      margin-bottom: clamp(-12px, -2vh, -4px);
+      letter-spacing: 1px;
+    }
+
+    @media (max-width: 768px) {
+      .tickets-hint {
+        font-size: clamp(1rem, 4.5vw, 1.4rem);
+        margin-top: clamp(16px, 3vh, 28px);
+      }
+    }
   </style>
 </head>
 <body>
@@ -695,6 +964,15 @@
     <div class="hero-section-label"><img class="label-quote left" src="assets/web/quote_left.png" alt="">Площадки<img class="label-quote right" src="assets/web/quote_right.png" alt=""></div>
 
     <div class="hero-venues">Смена <b>Бар «Фомин»</b> <b>Бар «Ща»</b><br><b>Дом актера</b> <b>Московский рынок</b> <b>Соль</b></div>
+
+    <div class="hero-section-label"><img class="label-quote left" src="assets/web/quote_left.png" alt="">Расписание по дням<img class="label-quote right" src="assets/web/quote_right.png" alt=""></div>
+
+    <div class="schedule">
+      <div class="schedule-tabs"></div>
+      <div class="schedule-content"></div>
+    </div>
+
+    <div class="tickets-hint">Билеты по дням в продаже!</div>
 
     <div class="cta-group hero-cta--bottom">
       <div class="cta-row">
@@ -909,6 +1187,207 @@
       clearTimeout(_fitTimer);
       _fitTimer = setTimeout(fitArtists, 60);
     });
+
+    // ─── SCHEDULE ─────────────────────────────────────────────────
+    const SCHEDULE = [
+      {
+        id: 'thu', dateLabel: '21 мая', shortDay: 'чт', dayName: 'четверг',
+        startMin: 18 * 60, endMin: 24 * 60,
+        stages: [
+          { name: 'Суперфрукты', venue: 'Московский рынок', color: 'blue', slots: [
+            ['ильдус', '18:30', '18:50'],
+            ['Please Tokyo Please this is Tokyo', '19:10', '19:40'],
+            ['post-dukes', '20:00', '20:30'],
+          ]},
+          { name: 'Подполье', venue: 'Бар «Фомин»', color: 'purple', slots: [
+            ['dj кеша', '21:30', '22:00'],
+            ['самира + сабина', '22:10', '22:40'],
+            ['секретный гость', '22:50', '23:20'],
+          ]},
+        ],
+      },
+      {
+        id: 'fri', dateLabel: '22 мая', shortDay: 'пт', dayName: 'пятница',
+        startMin: 18 * 60, endMin: 25 * 60,
+        stages: [
+          { name: 'Волны', venue: 'Бар «Ща»', color: 'blue', slots: [
+            ['42AA', '18:00', '18:20'],
+            ['Ваш Паникёр', '18:50', '19:10'],
+            ['стать твоим котом', '19:40', '20:00'],
+            ['мерцание', '20:20', '20:50'],
+            ['наш балкон', '21:10', '21:40'],
+            ['суперпечаль :(', '22:00', '22:30'],
+            ['Чёрный Государь', '23:00', '23:30'],
+          ]},
+          { name: 'Своды', venue: 'Бар «Ща»', color: 'purple', slots: [
+            ['Dainty', '18:20', '19:00'],
+            ['Ыспай Бит', '19:10', '19:50'],
+            ['солнце любовь', '20:00', '20:20'],
+            ['фасад', '20:50', '21:10'],
+            ['падение дома ашеров', '21:40', '22:00'],
+            ['Тимур Птахин', '22:30', '23:10'],
+            ['подвала ноктюрн', '23:40', '00:20'],
+          ]},
+          { name: 'Механика', venue: 'Бар «Ща»', color: 'green', slots: [
+            ['Tag Ear', '18:20', '19:00'],
+            ['endingmirage', '19:10', '19:50'],
+            ['тени лучей', '20:00', '20:40'],
+            ['Radik Khammatov', '20:50', '21:30'],
+            ['DJ ARTURBO & GrooVova & Yadolov', '21:40', '22:40'],
+            ['секретный артист', '22:50', '00:00'],
+          ]},
+        ],
+      },
+      {
+        id: 'sat', dateLabel: '23 мая', shortDay: 'сб', dayName: 'суббота',
+        startMin: 16 * 60, endMin: 25 * 60,
+        stages: [
+          { name: 'Цветы', venue: 'Смена', color: 'blue', slots: [
+            ['онджо', '16:00', '16:30'],
+            ['Holofonote', '16:40', '17:10'],
+            ['Орнитология', '17:20', '17:50'],
+          ]},
+          { name: 'Культура', venue: 'Дом Актёра', color: 'red', slots: [
+            ['11:11', '18:30', '19:00'],
+            ['пляжные цветы', '19:20', '19:50'],
+            ['Толмачи', '20:10', '20:40'],
+            ['Луговые Мари', '21:10', '21:40'],
+            ['Жарок', '22:00', '22:30'],
+          ]},
+          { name: 'Волны', venue: 'Бар «Ща»', color: 'blue', slots: [
+            ['дом номер семнадцать', '18:40', '19:10'],
+            ['моя подавленная агрессия', '19:30', '20:00'],
+            ['равноденствие', '20:50', '21:20'],
+            ['Гловертаун', '22:30', '23:00'],
+            ['Лес Гинкго', '23:20', '23:50'],
+            ['Домашний беспорядок', '00:10', '00:40'],
+          ]},
+          { name: 'Своды', venue: 'Бар «Ща»', color: 'purple', slots: [
+            ['Признаки ранней весны', '18:20', '18:50'],
+            ['метеосводка', '19:10', '19:30'],
+            ['Один в оленьем парке', '19:50', '20:30'],
+            ['yngsad', '20:40', '21:10'],
+            ['Час до утра', '21:40', '22:10'],
+            ['Айдар Исхаков', '23:00', '23:20'],
+            ['Taraf', '23:50', '00:10'],
+          ]},
+          { name: 'Механика', venue: 'Бар «Ща»', color: 'green', slots: [
+            ['sasha shardak', '18:00', '19:20'],
+            ['emile august', '19:30', '20:30'],
+            ['A.G. + lostntaiga', '20:40', '21:40'],
+            ['Polina Vlasova', '21:50', '22:50'],
+            ['marat suleimanov + Vanya Limb', '23:00', '00:00'],
+          ]},
+        ],
+      },
+      {
+        id: 'sun', dateLabel: '24 мая', shortDay: 'вс', dayName: 'воскресенье',
+        startMin: 18 * 60, endMin: 25 * 60,
+        stages: [
+          { name: 'Цветы', venue: 'Смена', color: 'blue', slots: [
+            ['марат сулейманов', '18:00', '18:40'],
+            ['Рыцарь Диких Яблок', '18:50', '19:30'],
+          ]},
+          { name: 'Подполье', venue: 'Бар «Фомин»', color: 'purple', slots: [
+            ['Synthezavr', '20:00', '20:20'],
+            ['Мистер Кисулькин', '20:30', '21:00'],
+            ['Вернуть Бобра!', '21:10', '21:30'],
+            ['амперметр', '21:40', '22:10'],
+            ['МС Каршы', '22:20', '22:50'],
+          ]},
+          { name: 'Вестники', venue: 'Бар «Соль»', color: 'blue', slots: [
+            ['Саша Шардак', '22:10', '22:40'],
+            ['Эркин', '22:40', '23:10'],
+            ['tangerrriiine', '23:10', '23:40'],
+            ['Вова из Сияния', '23:40', '01:00'],
+          ]},
+        ],
+      },
+    ];
+
+    function _t(s) { const [h, m] = s.split(':').map(Number); return h * 60 + m; }
+    function _esc(s) { return s.replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c])); }
+
+    function renderSchedule() {
+      const tabsEl = document.querySelector('.schedule-tabs');
+      const contentEl = document.querySelector('.schedule-content');
+      if (!tabsEl || !contentEl) return;
+
+      tabsEl.innerHTML = SCHEDULE.map((day, i) => {
+        const dateNum = day.dateLabel.split(' ')[0];
+        return `
+          <button class="schedule-tab${day.id === 'sat' ? ' active' : ''}" type="button" data-target="${day.id}">
+            <span class="tab-full">${day.dateLabel}, ${day.shortDay}</span><span class="tab-compact">${dateNum} ${day.shortDay}</span>
+          </button>
+        `;
+      }).join('');
+
+      contentEl.innerHTML = SCHEDULE.map((day, i) => {
+        const dayMins = day.endMin - day.startMin;
+        const hours = [];
+        for (let m = 0; m <= dayMins; m += 60) {
+          const totalMin = day.startMin + m;
+          const h = Math.floor(totalMin / 60) % 24;
+          hours.push({ m, label: String(h).padStart(2, '0') + ':00' });
+        }
+        const headersHtml = day.stages.map(s => `
+          <div class="stage-header">
+            <div class="stage-name">${_esc(s.name)}</div>
+            <div class="stage-venue">${_esc(s.venue)}</div>
+          </div>
+        `).join('');
+        const stagesHtml = day.stages.map(stage => {
+          const slotsHtml = stage.slots.map(([artist, start, end]) => {
+            let startMin = _t(start);
+            let endMin = _t(end);
+            if (startMin < day.startMin) startMin += 1440;
+            if (endMin <= startMin) endMin += 1440;
+            const relStart = startMin - day.startMin;
+            const dur = endMin - startMin;
+            return `
+              <div class="slot" style="--start:${relStart};--dur:${dur}">
+                <div class="slot-time">${_esc(start)}</div>
+                <div class="slot-artist">${_esc(artist)}</div>
+              </div>
+            `;
+          }).join('');
+          return `
+            <div class="stage stage-${stage.color}">
+              <div class="stage-header-mobile">
+                <div class="stage-name">${_esc(stage.name)}</div>
+                <div class="stage-venue">${_esc(stage.venue)}</div>
+              </div>
+              ${slotsHtml}
+            </div>
+          `;
+        }).join('');
+        const hoursHtml = hours.map(({ m, label }) => `<div class="hour-label" style="--m:${m}">${label}</div>`).join('');
+        const linesHtml = hours.map(({ m }) => `<div class="hour-line" style="--m:${m}"></div>`).join('');
+        return `
+          <div class="schedule-day${day.id === 'sat' ? ' active' : ''}" data-day="${day.id}">
+            <h3 class="schedule-day-title">${day.dateLabel}, ${day.dayName}</h3>
+            <div class="schedule-day-scroll">
+              <div class="schedule-grid" style="--day-mins:${dayMins}">
+                <div class="stage-headers-row">${headersHtml}</div>
+                <div class="time-axis time-axis-left">${hoursHtml}</div>
+                <div class="schedule-stages">${linesHtml}${stagesHtml}</div>
+                <div class="time-axis time-axis-right">${hoursHtml}</div>
+              </div>
+            </div>
+          </div>
+        `;
+      }).join('');
+
+      tabsEl.addEventListener('click', e => {
+        const tab = e.target.closest('.schedule-tab');
+        if (!tab) return;
+        const target = tab.dataset.target;
+        tabsEl.querySelectorAll('.schedule-tab').forEach(t => t.classList.toggle('active', t.dataset.target === target));
+        contentEl.querySelectorAll('.schedule-day').forEach(d => d.classList.toggle('active', d.dataset.day === target));
+      });
+    }
+
+    renderSchedule();
   </script>
 </body>
 </html>
