@@ -736,6 +736,13 @@
       hyphens: auto;
     }
 
+    .artist-link {
+      color: inherit;
+      text-decoration: none;
+      cursor: pointer;
+    }
+    .artist-link:hover { text-decoration: underline; }
+
     /* Stage colors mapped to social-media palette */
     .stage-blue   { --slot-fill: #bbd5e6; --slot-stroke: var(--purple); --slot-text: rgb(0, 0, 0); }
     .stage-purple { --slot-fill: #a98eb6; --slot-stroke: var(--purple); --slot-text: white;        }
@@ -1293,6 +1300,94 @@
     function _t(s) { const [h, m] = s.split(':').map(Number); return h * 60 + m; }
     function _esc(s) { return s.replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c])); }
 
+    const ARTIST_LINKS = {
+      '11:11': 'https://t.me/eleven_eleven_the_band',
+      '42AA': 'https://t.me/we_are_42AA',
+      'A.G.': 'https://t.me/+giSLlLIRU4llNjYy',
+      'Dainty': 'https://t.me/dainty_alt',
+      'DJ ARTURBO': 'https://t.me/arttruist',
+      'emile august': 'https://t.me/moyagostinaya',
+      'endingmirage': 'https://t.me/dazzlingvisions',
+      'Holofonote': 'https://t.me/holofonote_music',
+      'lostntaiga': 'https://t.me/fndlstnd',
+      'marat suleimanov': 'https://t.me/iammaratsuleimanov',
+      'марат сулейманов': 'https://t.me/iammaratsuleimanov',
+      'Please Tokyo Please this is Tokyo': 'https://t.me/lugovyemari',
+      'Polina Vlasova': 'https://t.me/catcatcatcattext',
+      'post-dukes': 'https://t.me/chudjafolk',
+      'Radik Khammatov': 'https://www.instagram.com/electrostaticplayground',
+      'sasha shardak': 'https://www.instagram.com/sasha_shardak',
+      'Саша Шардак': 'https://www.instagram.com/sasha_shardak',
+      'Synthezavr': 'https://t.me/nedachaday',
+      'Tag Ear': 'https://t.me/inininvt',
+      'Taraf': 'https://t.me/tatartili',
+      'Vanya Limb': 'https://www.instagram.com/vanyalimb',
+      'Айдар Исхаков': 'https://t.me/my_day_my_life3',
+      'амперметр': 'https://t.me/weareamperemetre',
+      'Ваш Паникёр': 'https://t.me/yourpanicfr',
+      'Вернуть Бобра!': 'https://t.me/vernut_bobra',
+      'Гловертаун': 'https://t.me/Glovertown',
+      'дом номер семнадцать': 'https://t.me/housenumberseventeen',
+      'Домашний беспорядок': 'https://t.me/GodBlessHomeMess',
+      'Жарок': 'https://www.instagram.com/zharok_24',
+      'ильдус': 'https://t.me/emo_squad',
+      'Лес Гинкго': 'https://t.me/lesginkgo',
+      'Луговые Мари': 'https://t.me/lugovyemari',
+      'мерцание': 'https://t.me/o_mercanie',
+      'метеосводка': 'https://t.me/meteogang',
+      'моя подавленная агрессия': 'https://www.instagram.com/my_suppressed_agression',
+      'МС Каршы': 'https://t.me/bakchalar',
+      'наш балкон': 'https://t.me/nashbalkonmatvashu',
+      'Один в оленьем парке': 'https://t.me/indeerpark',
+      'онджо': 'https://t.me/onjoo',
+      'Орнитология': 'https://www.instagram.com/ornitologia_band',
+      'падение дома ашеров': 'https://t.me/fallofusher',
+      'пляжные цветы': 'https://t.me/beachflowers',
+      'подвала ноктюрн': 'https://t.me/po2lanocturnelv',
+      'Признаки ранней весны': 'https://t.me/ghostsofearlyspring',
+      'равноденствие': 'https://www.instagram.com/ravnodenssstvie',
+      'Рыцарь Диких Яблок': 'https://instagram.com/rytsar_dikih_yablok',
+      'солнце любовь': 'https://t.me/sunandlovevaib',
+      'стать твоим котом': 'https://t.me/emo_squad',
+      'суперпечаль :(': 'https://t.me/nedachaday',
+      'тени лучей': 'https://t.me/teniluchey',
+      'Тимур Птахин': 'https://www.instagram.com/timurptahin',
+      'Толмачи': 'https://t.me/tolmachi_club',
+      'фасад': 'https://t.me/facadeband',
+      'Час до утра': 'https://t.me/un_hour_until_morning',
+      'Чёрный Государь': 'https://t.me/mityamusic',
+      'Шаль': 'https://t.me/shawl_shawl_sha',
+      'Ыспай Бит': 'https://t.me/yspai_bit',
+    };
+
+    // Wrap each known artist in an <a>. Splits on " & " / " + " so combo slots
+    // like "A.G. + lostntaiga" link each name independently.
+    function _linkifyArtist(name) {
+      return name.split(/(\s*[&+]\s*)/).map(part => {
+        if (/^\s*[&+]\s*$/.test(part)) return _esc(part);
+        const url = ARTIST_LINKS[part];
+        if (!url) return _esc(part);
+        return `<a class="artist-link" href="${url}" target="_blank" rel="noopener noreferrer">${_esc(part)}</a>`;
+      }).join('');
+    }
+
+    // Make lineup names clickable (static HTML in .hero-artists)
+    (function linkifyLineup() {
+      document.querySelectorAll('.hero-artists > span').forEach(span => {
+        const b = span.querySelector('b');
+        if (!b) return;
+        const url = ARTIST_LINKS[b.textContent];
+        if (!url) return;
+        const a = document.createElement('a');
+        a.href = url;
+        a.target = '_blank';
+        a.rel = 'noopener noreferrer';
+        a.className = 'artist-link';
+        while (span.firstChild) a.appendChild(span.firstChild);
+        span.appendChild(a);
+      });
+    })();
+
     function renderSchedule() {
       const tabsEl = document.querySelector('.schedule-tabs');
       const contentEl = document.querySelector('.schedule-content');
@@ -1332,7 +1427,7 @@
             return `
               <div class="slot" style="--start:${relStart};--dur:${dur}">
                 <div class="slot-time">${_esc(start)}</div>
-                <div class="slot-artist">${_esc(artist)}</div>
+                <div class="slot-artist">${_linkifyArtist(artist)}</div>
               </div>
             `;
           }).join('');
