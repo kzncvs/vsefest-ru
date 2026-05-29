@@ -53,6 +53,9 @@ PHOTOGRAPHERS = [
     {"slug": "renat", "name": "Ренат",
      "socials": [{"label": "@renato.bliss", "url": "https://www.instagram.com/renato.bliss"},
                  {"label": "VK", "url": "https://vk.com/renat_tukmakov"}]},
+    {"slug": "raul", "name": "Рауль",
+     "socials": [{"label": "@rmrodrigez", "url": "https://instagram.com/rmrodrigez"},
+                 {"label": "@muchacho_rodrigez", "url": "https://t.me/muchacho_rodrigez"}]},
 ]
 
 PREVIEW_MAX = 2000        # px, longest edge of the slider preview (lightbox)
@@ -130,6 +133,8 @@ def main():
                     help="upload tiers to S3 (needs the aws CLI)")
     ap.add_argument("--thumbs-only", action="store_true",
                     help="only (re)build + upload grid thumbnails; leave previews/originals untouched")
+    ap.add_argument("--only", metavar="SLUG",
+                    help="build/upload only this photographer (manifest still includes everyone)")
     args = ap.parse_args()
 
     if BUCKET == "CHANGE-ME":
@@ -163,7 +168,8 @@ def main():
                 "preview_path": BUILD_DIR / slug / f"{nn}.jpg",
                 "dl_name": f"festvse_{slug}_{nn}{ext}",
             }
-            tasks.append({"src": src, **keys[src]})
+            if not args.only or args.only == slug:
+                tasks.append({"src": src, **keys[src]})
         # Display order in the slider/grid = natural sort (Finder-like), independent of keys.
         photos = [{"thumb": keys[s]["thumb_key"], "preview": keys[s]["preview_key"],
                    "original": keys[s]["original_key"]}
