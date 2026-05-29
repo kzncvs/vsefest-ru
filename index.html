@@ -427,7 +427,7 @@
       }
       .hero-cta {
         padding: 14px 32px;
-      }
+      }в гри
       .ticket-label {
         font-size: 0.8rem;
         letter-spacing: 2px;
@@ -941,6 +941,78 @@
     }
     .gallery-tab:active { transform: scale(0.97); }
 
+    /* ── View switching: modal is either .view-grid (tiles) or .view-slider (lightbox) ── */
+    .gallery-grid { display: none; }
+    .gallery-back { display: none; }
+    .gallery-modal.view-grid .gallery-grid { display: grid; }
+    .gallery-modal.view-grid .gallery-stage,
+    .gallery-modal.view-grid .gallery-footer { display: none; }
+    .gallery-modal.view-slider .gallery-tabs { display: none; }
+    .gallery-modal.view-slider .gallery-back { display: inline-flex; }
+
+    /* Thumbnail grid */
+    .gallery-grid {
+      flex: 1;
+      min-height: 0;
+      overflow-y: auto;
+      align-content: start;
+      grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+      grid-auto-rows: 160px;      /* fixed row height → rows can't collapse/overlap */
+      gap: 6px;
+      padding: 4px clamp(10px, 3vw, 40px) 24px;
+    }
+    .gallery-tile {
+      position: relative;
+      display: block;
+      width: 100%;
+      height: 100%;               /* fill the grid cell (col width × 160px) */
+      margin: 0;
+      padding: 0;
+      border: none;
+      background: #1a1620;
+      border-radius: 4px;
+      overflow: hidden;
+      cursor: pointer;
+    }
+    .gallery-tile img {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.25s ease;
+    }
+    .gallery-tile:hover img { transform: scale(1.07); }
+    .gallery-tile.broken {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: rgba(255, 255, 255, 0.35);
+      font-size: 0.65rem;
+    }
+
+    /* Back-to-grid button (slider view) */
+    .gallery-back {
+      position: absolute;
+      top: 16px;
+      left: 18px;
+      z-index: 3;
+      align-items: center;
+      padding: 9px 20px;
+      font-family: 'Calibri', 'Gill Sans', sans-serif;
+      font-weight: 700;
+      font-size: 0.9rem;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      color: #fff;
+      background: rgba(255, 255, 255, 0.12);
+      border: none;
+      border-radius: 100px;
+      cursor: pointer;
+      transition: background 0.2s ease;
+    }
+    .gallery-back:hover { background: rgba(255, 255, 255, 0.26); }
+
     /* Horizontal scroll-snap slider — no JS library, native swipe on touch */
     .gallery-stage {
       position: relative;
@@ -1053,6 +1125,8 @@
       .gallery-footer { gap: 16px; padding: 10px 16px 18px; }
       .gallery-socials { gap: 12px; }
       .gallery-socials a, .gallery-download { font-size: 0.82rem; }
+      .gallery-grid { grid-template-columns: repeat(auto-fill, minmax(102px, 1fr)); grid-auto-rows: 112px; gap: 4px; padding: 4px 8px 18px; }
+      .gallery-back { top: 12px; left: 10px; padding: 7px 14px; font-size: 0.78rem; }
     }
   </style>
 </head>
@@ -1280,7 +1354,9 @@
   <!-- ═══ ФОТО-ГАЛЕРЕЯ ═══ -->
   <div class="gallery-modal" id="galleryModal" hidden role="dialog" aria-modal="true" aria-label="Фотографии с фестиваля">
     <button class="gallery-close" type="button" id="galleryClose" aria-label="Закрыть">&times;</button>
+    <button class="gallery-back" type="button" id="galleryBack" aria-label="Назад к сетке">&lsaquo;&ensp;все фото</button>
     <div class="gallery-tabs" id="galleryTabs" role="tablist"></div>
+    <div class="gallery-grid" id="galleryGrid"></div>
     <div class="gallery-stage">
       <button class="gallery-nav prev" type="button" id="galleryPrev" aria-label="Предыдущее фото">&lsaquo;</button>
       <div class="gallery-strip" id="galleryStrip"></div>
@@ -1708,17 +1784,20 @@
       if (!modal || !entry || !btnsEl) return;
 
       const tabsEl = document.getElementById('galleryTabs');
+      const gridEl = document.getElementById('galleryGrid');
       const stripEl = document.getElementById('galleryStrip');
       const closeBtn = document.getElementById('galleryClose');
+      const backBtn = document.getElementById('galleryBack');
       const prevBtn = document.getElementById('galleryPrev');
       const nextBtn = document.getElementById('galleryNext');
       const socialsEl = document.getElementById('gallerySocials');
       const counterEl = document.getElementById('galleryCounter');
       const downloadEl = document.getElementById('galleryDownload');
 
-      let data = null;   // { baseUrl, photographers: [...] }
-      let active = 0;    // active photographer index
-      let built = false;
+      let data = null;       // { baseUrl, photographers: [...] }
+      let active = 0;        // active photographer index
+      let view = 'grid';     // 'grid' (tiles) | 'slider' (lightbox)
+      let tabsBuilt = false;
 
       // Join a manifest path with baseUrl (absolute URLs pass through untouched).
       const url = (path) => {
@@ -1727,6 +1806,13 @@
         return base ? base + '/' + path.replace(/^\//, '') : path;
       };
 
+      function markBroken(img, sel, label) {
+        img.addEventListener('error', () => {
+          const el = img.closest(sel);
+          if (el) { el.classList.add('broken'); el.textContent = label; }
+        });
+      }
+
       function renderTabs() {
         tabsEl.innerHTML = data.photographers.map((p, i) =>
           `<button class="gallery-tab${i === active ? ' active' : ''}" type="button" role="tab" data-idx="${i}">${_esc(p.name)}</button>`
@@ -1734,19 +1820,23 @@
         tabsEl.style.display = data.photographers.length > 1 ? '' : 'none';
       }
 
+      // Grid of thumbnails for the active photographer (light `thumb` tier).
+      function renderGrid() {
+        const p = data.photographers[active];
+        gridEl.innerHTML = p.photos.map((ph, i) =>
+          `<button class="gallery-tile" type="button" data-idx="${i}" aria-label="Фото ${i + 1}"><img src="${_esc(url(ph.thumb || ph.preview))}" alt="" loading="lazy" decoding="async"></button>`
+        ).join('');
+        gridEl.querySelectorAll('img').forEach(img => markBroken(img, '.gallery-tile', '—'));
+        gridEl.scrollTop = 0;
+      }
+
+      // Full-size strip (lightbox) for the active photographer.
       function renderStrip() {
         const p = data.photographers[active];
         stripEl.innerHTML = p.photos.map((ph, i) =>
           `<div class="gallery-slide"><img src="${_esc(url(ph.preview))}" alt="${_esc(p.name)} — фото ${i + 1}" loading="lazy" decoding="async" draggable="false"></div>`
         ).join('');
-        stripEl.querySelectorAll('img').forEach(img => {
-          img.addEventListener('error', () => {
-            const slide = img.closest('.gallery-slide');
-            if (slide) { slide.classList.add('broken'); slide.textContent = 'фото недоступно'; }
-          });
-        });
-        stripEl.scrollLeft = 0;
-        updateFooter(0);
+        stripEl.querySelectorAll('img').forEach(img => markBroken(img, '.gallery-slide', 'фото недоступно'));
       }
 
       function currentIndex() {
@@ -1763,19 +1853,34 @@
           `<a href="${_esc(s.url)}" target="_blank" rel="noopener noreferrer">${_esc(s.label || s.url)}</a>`
         ).join('');
         const ph = p.photos[idx];
-        if (ph && ph.original) {
-          downloadEl.href = url(ph.original);
-          downloadEl.hidden = false;
-        } else {
-          downloadEl.hidden = true;
-        }
+        if (ph && ph.original) { downloadEl.href = url(ph.original); downloadEl.hidden = false; }
+        else { downloadEl.hidden = true; }
+      }
+
+      function showGrid() {
+        view = 'grid';
+        modal.classList.add('view-grid');
+        modal.classList.remove('view-slider');
+      }
+
+      // Enter the lightbox at photo `idx` of the active photographer.
+      function showSlider(idx) {
+        view = 'slider';
+        renderStrip();
+        modal.classList.add('view-slider');
+        modal.classList.remove('view-grid');
+        requestAnimationFrame(() => {
+          stripEl.scrollLeft = idx * stripEl.clientWidth;   // jump (strip now visible → width valid)
+          updateFooter(idx);
+        });
       }
 
       function selectPhotographer(i) {
         active = i;
         tabsEl.querySelectorAll('.gallery-tab').forEach(t =>
           t.classList.toggle('active', Number(t.dataset.idx) === i));
-        renderStrip();
+        renderGrid();
+        showGrid();
       }
 
       function step(dir) {
@@ -1783,8 +1888,8 @@
       }
 
       function open(idx) {
-        if (!built) { renderTabs(); built = true; }
-        selectPhotographer(idx || 0);
+        if (!tabsBuilt) { renderTabs(); tabsBuilt = true; }
+        selectPhotographer(idx || 0);   // opens on that photographer's grid
         modal.hidden = false;
         document.body.classList.add('gallery-lock');
         requestAnimationFrame(() => modal.classList.add('open'));
@@ -1800,26 +1905,31 @@
         if (b) open(Number(b.dataset.idx));
       });
       closeBtn.addEventListener('click', close);
+      backBtn.addEventListener('click', showGrid);
       prevBtn.addEventListener('click', () => step(-1));
       nextBtn.addEventListener('click', () => step(1));
       tabsEl.addEventListener('click', e => {
         const tab = e.target.closest('.gallery-tab');
         if (tab) selectPhotographer(Number(tab.dataset.idx));
       });
-      // Click on the letterbox margin (not the photo itself) closes the modal.
+      gridEl.addEventListener('click', e => {
+        const tile = e.target.closest('.gallery-tile');
+        if (tile) showSlider(Number(tile.dataset.idx));
+      });
+      // Click on the letterbox margin (not the photo) returns to the grid.
       stripEl.addEventListener('click', e => {
-        if (e.target.classList.contains('gallery-slide')) close();
+        if (e.target.classList.contains('gallery-slide')) showGrid();
       });
       let scrollT;
       stripEl.addEventListener('scroll', () => {
         clearTimeout(scrollT);
-        scrollT = setTimeout(() => updateFooter(currentIndex()), 60);
+        scrollT = setTimeout(() => { if (view === 'slider') updateFooter(currentIndex()); }, 60);
       });
       document.addEventListener('keydown', e => {
         if (modal.hidden) return;
-        if (e.key === 'Escape') close();
-        else if (e.key === 'ArrowLeft') step(-1);
-        else if (e.key === 'ArrowRight') step(1);
+        if (e.key === 'Escape') { view === 'slider' ? showGrid() : close(); }
+        else if (view === 'slider' && e.key === 'ArrowLeft') step(-1);
+        else if (view === 'slider' && e.key === 'ArrowRight') step(1);
       });
 
       // Load manifest; reveal the entry only if there are photos to show.

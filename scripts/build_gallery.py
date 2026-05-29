@@ -32,6 +32,7 @@ from pathlib import Path
 REPO = Path(__file__).resolve().parent.parent
 SRC_ROOT = REPO / "incoming"                 # incoming/<slug>/<any images>
 BUILD_DIR = REPO / "build" / "previews"      # staged resized previews (gitignored)
+THUMB_DIR = REPO / "build" / "thumbs"        # staged grid thumbnails (gitignored)
 MANIFEST = REPO / "assets" / "web" / "photos.json"
 
 # S3 (Yandex Object Storage). PUBLIC_BASE is what ends up in the manifest.
@@ -54,8 +55,10 @@ PHOTOGRAPHERS = [
                  {"label": "VK", "url": "https://vk.com/renat_tukmakov"}]},
 ]
 
-PREVIEW_MAX = 2000        # px, longest edge of the slider preview
+PREVIEW_MAX = 2000        # px, longest edge of the slider preview (lightbox)
 PREVIEW_QUALITY = 82      # JPEG quality 0-100
+THUMB_MAX = 640           # px, longest edge of the grid thumbnail
+THUMB_QUALITY = 72        # JPEG quality for thumbnails
 WORKERS = 8               # parallel resize/upload workers
 IMG_EXTS = {".jpg", ".jpeg", ".png", ".heic", ".tif", ".tiff", ".webp"}
 # ──────────────────────────────────────────────────────────────────────────────
@@ -85,14 +88,14 @@ def natkey(path):
     return [int(t) if t.isdigit() else t.lower() for t in re.split(r'(\d+)', path.name)]
 
 
-def make_preview(src, dst):
-    """Downscale to PREVIEW_MAX longest edge, re-encode JPEG (sips). Skips if fresh."""
+def resize(src, dst, maxpx, quality):
+    """Downscale to `maxpx` longest edge, re-encode JPEG (sips). Skips if already fresh."""
     if dst.exists() and dst.stat().st_mtime >= src.stat().st_mtime:
-        return  # already up to date — lets dry-run then --upload skip re-resizing
+        return  # already up to date — lets re-runs skip work
     dst.parent.mkdir(parents=True, exist_ok=True)
     sh(["sips", "-s", "format", "jpeg",
-        "-Z", str(PREVIEW_MAX),
-        "-s", "formatOptions", str(PREVIEW_QUALITY),
+        "-Z", str(maxpx),
+        "-s", "formatOptions", str(quality),
         str(src), "--out", str(dst)])
 
 
@@ -107,19 +110,26 @@ def s3_cp(local, key, content_disposition=None):
     sh(cmd)
 
 
-def process(task, do_upload):
-    """Resize one preview and, if requested, upload preview + original."""
-    make_preview(task["src"], task["preview_path"])
+def process(task, do_upload, thumbs_only=False):
+    """Resize the tiers and (if do_upload) push them. thumbs_only touches only the
+    grid thumbnail — used to add the grid without re-uploading previews/originals."""
+    resize(task["src"], task["thumb_path"], THUMB_MAX, THUMB_QUALITY)
+    if not thumbs_only:
+        resize(task["src"], task["preview_path"], PREVIEW_MAX, PREVIEW_QUALITY)
     if do_upload:
-        s3_cp(task["preview_path"], task["preview_key"])
-        s3_cp(task["src"], task["original_key"],
-              content_disposition=f'attachment; filename="{task["dl_name"]}"')
+        s3_cp(task["thumb_path"], task["thumb_key"])
+        if not thumbs_only:
+            s3_cp(task["preview_path"], task["preview_key"])
+            s3_cp(task["src"], task["original_key"],
+                  content_disposition=f'attachment; filename="{task["dl_name"]}"')
 
 
 def main():
     ap = argparse.ArgumentParser(description="Build the photo gallery manifest + assets.")
     ap.add_argument("--upload", action="store_true",
-                    help="upload previews + originals to S3 (needs the aws CLI)")
+                    help="upload tiers to S3 (needs the aws CLI)")
+    ap.add_argument("--thumbs-only", action="store_true",
+                    help="only (re)build + upload grid thumbnails; leave previews/originals untouched")
     args = ap.parse_args()
 
     if BUCKET == "CHANGE-ME":
@@ -146,14 +156,17 @@ def main():
             nn = f"{i:0{width}d}"
             ext = src.suffix.lower()
             keys[src] = {
+                "thumb_key": f"{PREFIX}/{slug}/thumb/{nn}.jpg",
                 "preview_key": f"{PREFIX}/{slug}/{nn}.jpg",
                 "original_key": f"{PREFIX}/{slug}/orig/{nn}{ext}",
+                "thumb_path": THUMB_DIR / slug / f"{nn}.jpg",
                 "preview_path": BUILD_DIR / slug / f"{nn}.jpg",
                 "dl_name": f"festvse_{slug}_{nn}{ext}",
             }
             tasks.append({"src": src, **keys[src]})
-        # Display order in the slider = natural sort (Finder-like), independent of keys.
-        photos = [{"preview": keys[s]["preview_key"], "original": keys[s]["original_key"]}
+        # Display order in the slider/grid = natural sort (Finder-like), independent of keys.
+        photos = [{"thumb": keys[s]["thumb_key"], "preview": keys[s]["preview_key"],
+                   "original": keys[s]["original_key"]}
                   for s in sorted(sources, key=natkey)]
         manifest["photographers"].append({
             "slug": slug, "name": p["name"],
@@ -171,7 +184,7 @@ def main():
     done = 0
     lock = threading.Lock()
     with ThreadPoolExecutor(max_workers=WORKERS) as ex:
-        futs = [ex.submit(process, t, args.upload) for t in tasks]
+        futs = [ex.submit(process, t, args.upload, args.thumbs_only) for t in tasks]
         for f in as_completed(futs):
             f.result()  # re-raise the first worker error, if any
             with lock:
