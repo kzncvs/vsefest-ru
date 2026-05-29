@@ -93,6 +93,7 @@
     .hero-date {
       position: relative;
       z-index: 25;
+      pointer-events: none;       /* decorative heading — let clicks reach the socials below */
       display: inline-flex;
       align-items: center;
       gap: 12px;
@@ -515,16 +516,17 @@
       position: relative;
       z-index: 20;
       display: flex;
-      gap: 32px;
+      gap: clamp(30px, 4.5vw, 52px);
+      margin-top: clamp(14px, 3.5vh, 44px);   /* extra breathing room below the (scaled-up) date */
     }
 
     .socials a {
       color: var(--purple);
       text-decoration: none;
       font-family: 'Calibri', 'Gill Sans', 'Trebuchet MS', sans-serif;
-      font-size: 1rem;
+      font-size: clamp(1.15rem, 2vw, 1.6rem);
       font-weight: 700;
-      letter-spacing: 1px;
+      letter-spacing: 1.5px;
       text-transform: uppercase;
       opacity: 0.8;
       transition: opacity 0.2s ease;
@@ -537,10 +539,11 @@
 
     @media (max-width: 768px) {
       .socials {
-        gap: 20px;
+        gap: clamp(22px, 7vw, 38px);
+        margin-top: clamp(10px, 2.5vh, 28px);
       }
       .socials a {
-        font-size: 0.75rem;
+        font-size: clamp(1rem, 4.5vw, 1.3rem);
       }
     }
 
@@ -819,6 +822,238 @@
         margin-top: clamp(16px, 3vh, 28px);
       }
     }
+
+    /* ─── PHOTOS ENTRY (revealed by JS once the manifest loads) ─── */
+    .photos-entry { display: flex; flex-direction: column; align-items: center; }
+    .photos-entry[hidden] { display: none; }
+
+    /* row of photographer buttons under the «Фотографии» label */
+    .photos-btns {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 14px;
+      margin-top: clamp(14px, 2.5vh, 28px);
+    }
+
+    /* ─── PHOTOS BUTTON (mirrors .hero-cta, blue instead of purple) ─── */
+    .photos-btn {
+      position: relative;
+      z-index: 20;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 12px;
+      padding: 16px 44px;
+      background: var(--blue);
+      border: 2px solid var(--blue);
+      cursor: pointer;
+      border-radius: 100px;
+      box-shadow: 0 4px 20px rgba(123, 175, 212, 0.3);
+      transition: all 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+    .photos-btn:hover {
+      background: #5f97c0;
+      border-color: #5f97c0;
+      letter-spacing: 5px;
+      box-shadow: 0 8px 32px rgba(123, 175, 212, 0.5);
+    }
+    .photos-btn:active { transform: scale(0.97); }
+    .photos-btn-label {
+      font-size: 1.2rem;
+      font-weight: 600;
+      font-family: 'Calibri', 'Gill Sans', 'Trebuchet MS', sans-serif;
+      text-transform: uppercase;
+      letter-spacing: 3px;
+      padding-top: 3px;
+      color: white;
+      white-space: nowrap;
+      pointer-events: none;
+      transition: letter-spacing 0.35s ease;
+    }
+    @media (max-width: 768px) {
+      .photos-btns { gap: 10px; }
+      .photos-btn { padding: 12px 26px; }
+      .photos-btn-label { font-size: 0.95rem; letter-spacing: 1.5px; }
+    }
+
+    /* ─── PHOTO GALLERY MODAL ─── */
+    .gallery-modal {
+      position: fixed;
+      inset: 0;
+      z-index: 1000;
+      display: flex;
+      flex-direction: column;
+      background: #0c0a10;
+      opacity: 0;
+      transition: opacity 0.25s ease;
+    }
+    .gallery-modal[hidden] { display: none; }
+    .gallery-modal.open { opacity: 1; }
+    body.gallery-lock { overflow: hidden; }
+
+    .gallery-close {
+      position: absolute;
+      top: 14px;
+      right: 18px;
+      z-index: 3;
+      width: 44px;
+      height: 44px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 30px;
+      line-height: 1;
+      color: #fff;
+      background: rgba(255, 255, 255, 0.12);
+      border: none;
+      border-radius: 50%;
+      cursor: pointer;
+      transition: background 0.2s ease;
+    }
+    .gallery-close:hover { background: rgba(255, 255, 255, 0.28); }
+
+    .gallery-tabs {
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 10px;
+      padding: 18px 64px 14px;
+    }
+    .gallery-tab {
+      font-family: 'Calibri', 'Gill Sans', 'Trebuchet MS', sans-serif;
+      font-weight: 700;
+      font-size: clamp(0.85rem, 1.4vw, 1.05rem);
+      padding: 7px 20px;
+      border: 2px solid rgba(255, 255, 255, 0.55);
+      background: transparent;
+      color: rgba(255, 255, 255, 0.85);
+      border-radius: 100px;
+      cursor: pointer;
+      letter-spacing: 0.3px;
+      transition: background 0.2s ease, color 0.2s ease, border-color 0.2s ease, transform 0.15s ease;
+    }
+    .gallery-tab:hover { background: rgba(255, 255, 255, 0.14); }
+    .gallery-tab.active {
+      background: #fff;
+      color: #1a1620;
+      border-color: #fff;
+    }
+    .gallery-tab:active { transform: scale(0.97); }
+
+    /* Horizontal scroll-snap slider — no JS library, native swipe on touch */
+    .gallery-stage {
+      position: relative;
+      flex: 1;
+      min-height: 0;
+      display: flex;
+      align-items: center;
+    }
+    .gallery-strip {
+      display: flex;
+      width: 100%;
+      height: 100%;
+      overflow-x: auto;
+      overflow-y: hidden;
+      scroll-snap-type: x mandatory;
+      scroll-behavior: smooth;
+      scrollbar-width: none;
+    }
+    .gallery-strip::-webkit-scrollbar { display: none; }
+    .gallery-slide {
+      flex: 0 0 100%;
+      width: 100%;
+      height: 100%;
+      scroll-snap-align: center;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 8px 16px;
+    }
+    .gallery-slide img {
+      max-width: 100%;
+      max-height: 100%;
+      object-fit: contain;
+      border-radius: 4px;
+      user-select: none;
+    }
+    /* placeholder shown until/if an image fails to load */
+    .gallery-slide.broken {
+      color: rgba(255, 255, 255, 0.4);
+      font-family: 'Calibri', 'Gill Sans', sans-serif;
+      font-size: 0.9rem;
+    }
+
+    .gallery-nav {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      z-index: 2;
+      width: 52px;
+      height: 52px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 32px;
+      line-height: 1;
+      color: #fff;
+      background: rgba(0, 0, 0, 0.35);
+      border: none;
+      border-radius: 50%;
+      cursor: pointer;
+      transition: background 0.2s ease;
+    }
+    .gallery-nav:hover { background: rgba(0, 0, 0, 0.6); }
+    .gallery-nav.prev { left: 16px; }
+    .gallery-nav.next { right: 16px; }
+
+    .gallery-footer {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 28px;
+      padding: 14px 64px 22px;
+      flex-wrap: wrap;
+    }
+    .gallery-socials { display: flex; align-items: center; gap: 18px; }
+    .gallery-socials a,
+    .gallery-download {
+      font-family: 'Calibri', 'Gill Sans', 'Trebuchet MS', sans-serif;
+      font-weight: 700;
+      font-size: 0.95rem;
+      letter-spacing: 0.5px;
+      text-decoration: none;
+      color: #fff;
+      white-space: nowrap;
+    }
+    .gallery-socials a { opacity: 0.8; }
+    .gallery-socials a:hover { opacity: 1; text-decoration: underline; }
+    .gallery-counter {
+      font-family: 'Calibri', 'Gill Sans', sans-serif;
+      font-size: 0.9rem;
+      color: rgba(255, 255, 255, 0.55);
+      font-variant-numeric: tabular-nums;
+    }
+    .gallery-download {
+      padding: 9px 22px;
+      border: 2px solid var(--blue);
+      border-radius: 100px;
+      background: var(--blue);
+      text-transform: uppercase;
+      transition: background 0.2s ease, border-color 0.2s ease;
+    }
+    .gallery-download:hover { background: #5f97c0; border-color: #5f97c0; }
+    .gallery-download[hidden] { display: none; }
+
+    @media (max-width: 768px) {
+      .gallery-tabs { padding: 16px 16px 10px; }
+      .gallery-nav { width: 42px; height: 42px; font-size: 26px; }
+      .gallery-nav.prev { left: 6px; }
+      .gallery-nav.next { right: 6px; }
+      .gallery-footer { gap: 16px; padding: 10px 16px 18px; }
+      .gallery-socials { gap: 12px; }
+      .gallery-socials a, .gallery-download { font-size: 0.82rem; }
+    }
   </style>
 </head>
 <body>
@@ -831,23 +1066,18 @@
 
     <div class="hero-subtitle">Независимый музыкальный фестиваль</div>
 
-    <div class="cta-group cta-group--top">
-      <div class="cta-row">
-        <img class="btn-quote left" src="assets/web/quote_left.png" alt="">
-        <div class="hero-cta">
-          <span class="ticket-label">Купить билеты</span>
-          <a href="https://qtickets.ru/event/225583" class="qtickets-button">Купить билеты</a>
-        </div>
-        <img class="btn-quote right" src="assets/web/quote_right.png" alt="">
-      </div>
-      <div class="socials">
-        <a href="https://t.me/fest_vse" target="_blank">telegram</a>
-        <a href="https://vk.com/fest_vse" target="_blank">vk</a>
-      </div>
-    </div>
-
     <div class="hero-date">
       21–24 мая
+    </div>
+
+    <div class="socials">
+      <a href="https://t.me/fest_vse" target="_blank">telegram</a>
+      <a href="https://vk.com/fest_vse" target="_blank">vk</a>
+    </div>
+
+    <div class="photos-entry" id="photosEntry" hidden>
+      <div class="hero-section-label"><img class="label-quote left" src="assets/web/quote_left.png" alt="">Фотографии<img class="label-quote right" src="assets/web/quote_right.png" alt=""></div>
+      <div class="photos-btns" id="photosBtns"></div>
     </div>
 
     <div class="hero-section-label"><img class="label-quote left" src="assets/web/quote_left.png" alt="">Артисты<img class="label-quote right" src="assets/web/quote_right.png" alt=""></div>
@@ -938,23 +1168,6 @@
     <div class="schedule">
       <div class="schedule-tabs"></div>
       <div class="schedule-content"></div>
-    </div>
-
-    <div class="tickets-hint">Билеты по дням в продаже!</div>
-
-    <div class="cta-group hero-cta--bottom">
-      <div class="cta-row">
-        <img class="btn-quote left" src="assets/web/quote_left.png" alt="">
-        <div class="hero-cta">
-          <span class="ticket-label">Купить билеты</span>
-          <a href="https://qtickets.ru/event/225583" class="qtickets-button">Купить билеты</a>
-        </div>
-        <img class="btn-quote right" src="assets/web/quote_right.png" alt="">
-      </div>
-      <div class="socials">
-        <a href="https://t.me/fest_vse" target="_blank">telegram</a>
-        <a href="https://vk.com/fest_vse" target="_blank">vk</a>
-      </div>
     </div>
 
     <!-- TOP ROW — только партнёры -->
@@ -1064,8 +1277,22 @@
 
   </section>
 
+  <!-- ═══ ФОТО-ГАЛЕРЕЯ ═══ -->
+  <div class="gallery-modal" id="galleryModal" hidden role="dialog" aria-modal="true" aria-label="Фотографии с фестиваля">
+    <button class="gallery-close" type="button" id="galleryClose" aria-label="Закрыть">&times;</button>
+    <div class="gallery-tabs" id="galleryTabs" role="tablist"></div>
+    <div class="gallery-stage">
+      <button class="gallery-nav prev" type="button" id="galleryPrev" aria-label="Предыдущее фото">&lsaquo;</button>
+      <div class="gallery-strip" id="galleryStrip"></div>
+      <button class="gallery-nav next" type="button" id="galleryNext" aria-label="Следующее фото">&rsaquo;</button>
+    </div>
+    <div class="gallery-footer">
+      <span class="gallery-socials" id="gallerySocials"></span>
+      <span class="gallery-counter" id="galleryCounter"></span>
+      <a class="gallery-download" id="galleryDownload" target="_blank" rel="noopener noreferrer">Скачать оригинал</a>
+    </div>
+  </div>
 
-  <script type="text/javascript" src="https://cdn.qtickets.tech/openapi.js" defer></script>
 
   <script>
     const hero = document.querySelector('.hero');
@@ -1468,6 +1695,148 @@
     }
 
     renderSchedule();
+
+    // ─── PHOTO GALLERY ────────────────────────────────────────────
+    // Manifest (assets/web/photos.json) lists photographers + photo URLs.
+    // Image bytes live in S3 (Yandex Object Storage); only this manifest is
+    // version-controlled. Previews feed the slider; originals are the download
+    // target (served with Content-Disposition: attachment so the link saves).
+    (function initGallery() {
+      const modal = document.getElementById('galleryModal');
+      const entry = document.getElementById('photosEntry');
+      const btnsEl = document.getElementById('photosBtns');
+      if (!modal || !entry || !btnsEl) return;
+
+      const tabsEl = document.getElementById('galleryTabs');
+      const stripEl = document.getElementById('galleryStrip');
+      const closeBtn = document.getElementById('galleryClose');
+      const prevBtn = document.getElementById('galleryPrev');
+      const nextBtn = document.getElementById('galleryNext');
+      const socialsEl = document.getElementById('gallerySocials');
+      const counterEl = document.getElementById('galleryCounter');
+      const downloadEl = document.getElementById('galleryDownload');
+
+      let data = null;   // { baseUrl, photographers: [...] }
+      let active = 0;    // active photographer index
+      let built = false;
+
+      // Join a manifest path with baseUrl (absolute URLs pass through untouched).
+      const url = (path) => {
+        if (/^https?:\/\//.test(path)) return path;
+        const base = (data.baseUrl || '').replace(/\/$/, '');
+        return base ? base + '/' + path.replace(/^\//, '') : path;
+      };
+
+      function renderTabs() {
+        tabsEl.innerHTML = data.photographers.map((p, i) =>
+          `<button class="gallery-tab${i === active ? ' active' : ''}" type="button" role="tab" data-idx="${i}">${_esc(p.name)}</button>`
+        ).join('');
+        tabsEl.style.display = data.photographers.length > 1 ? '' : 'none';
+      }
+
+      function renderStrip() {
+        const p = data.photographers[active];
+        stripEl.innerHTML = p.photos.map((ph, i) =>
+          `<div class="gallery-slide"><img src="${_esc(url(ph.preview))}" alt="${_esc(p.name)} — фото ${i + 1}" loading="lazy" decoding="async" draggable="false"></div>`
+        ).join('');
+        stripEl.querySelectorAll('img').forEach(img => {
+          img.addEventListener('error', () => {
+            const slide = img.closest('.gallery-slide');
+            if (slide) { slide.classList.add('broken'); slide.textContent = 'фото недоступно'; }
+          });
+        });
+        stripEl.scrollLeft = 0;
+        updateFooter(0);
+      }
+
+      function currentIndex() {
+        const w = stripEl.clientWidth;
+        return w ? Math.round(stripEl.scrollLeft / w) : 0;
+      }
+
+      function updateFooter(idx) {
+        const p = data.photographers[active];
+        const total = p.photos.length;
+        counterEl.textContent = total ? `${idx + 1} / ${total}` : '';
+        const socials = p.socials || (p.social ? [p.social] : []);
+        socialsEl.innerHTML = socials.map(s =>
+          `<a href="${_esc(s.url)}" target="_blank" rel="noopener noreferrer">${_esc(s.label || s.url)}</a>`
+        ).join('');
+        const ph = p.photos[idx];
+        if (ph && ph.original) {
+          downloadEl.href = url(ph.original);
+          downloadEl.hidden = false;
+        } else {
+          downloadEl.hidden = true;
+        }
+      }
+
+      function selectPhotographer(i) {
+        active = i;
+        tabsEl.querySelectorAll('.gallery-tab').forEach(t =>
+          t.classList.toggle('active', Number(t.dataset.idx) === i));
+        renderStrip();
+      }
+
+      function step(dir) {
+        stripEl.scrollBy({ left: dir * stripEl.clientWidth, behavior: 'smooth' });
+      }
+
+      function open(idx) {
+        if (!built) { renderTabs(); built = true; }
+        selectPhotographer(idx || 0);
+        modal.hidden = false;
+        document.body.classList.add('gallery-lock');
+        requestAnimationFrame(() => modal.classList.add('open'));
+      }
+      function close() {
+        modal.classList.remove('open');
+        document.body.classList.remove('gallery-lock');
+        setTimeout(() => { modal.hidden = true; }, 250);
+      }
+
+      btnsEl.addEventListener('click', e => {
+        const b = e.target.closest('.photos-btn');
+        if (b) open(Number(b.dataset.idx));
+      });
+      closeBtn.addEventListener('click', close);
+      prevBtn.addEventListener('click', () => step(-1));
+      nextBtn.addEventListener('click', () => step(1));
+      tabsEl.addEventListener('click', e => {
+        const tab = e.target.closest('.gallery-tab');
+        if (tab) selectPhotographer(Number(tab.dataset.idx));
+      });
+      // Click on the letterbox margin (not the photo itself) closes the modal.
+      stripEl.addEventListener('click', e => {
+        if (e.target.classList.contains('gallery-slide')) close();
+      });
+      let scrollT;
+      stripEl.addEventListener('scroll', () => {
+        clearTimeout(scrollT);
+        scrollT = setTimeout(() => updateFooter(currentIndex()), 60);
+      });
+      document.addEventListener('keydown', e => {
+        if (modal.hidden) return;
+        if (e.key === 'Escape') close();
+        else if (e.key === 'ArrowLeft') step(-1);
+        else if (e.key === 'ArrowRight') step(1);
+      });
+
+      // Load manifest; reveal the entry only if there are photos to show.
+      // One button per photographer — each opens the gallery on that photographer.
+      fetch('assets/web/photos.json', { cache: 'no-cache' })
+        .then(r => r.ok ? r.json() : Promise.reject(r.status))
+        .then(json => {
+          const pjs = (json.photographers || []).filter(p => p.photos && p.photos.length);
+          if (!pjs.length) return;
+          data = { baseUrl: json.baseUrl || '', photographers: pjs };
+          btnsEl.innerHTML = pjs.map((p, i) =>
+            `<button class="photos-btn" type="button" data-idx="${i}"><span class="photos-btn-label">${_esc(p.name)}</span></button>`
+          ).join('');
+          entry.hidden = false;
+        })
+        .catch(() => { /* no manifest yet — entry stays hidden */ });
+    })();
   </script>
 </body>
 </html>
