@@ -58,6 +58,8 @@ PHOTOGRAPHERS = [
                  {"label": "@muchacho_rodrigez", "url": "https://t.me/muchacho_rodrigez"}]},
     {"slug": "gordey", "name": "Гордей",
      "socials": [{"label": "@lvkgr", "url": "https://www.instagram.com/lvkgr/"}]},
+    {"slug": "ramil", "name": "Рамиль",
+     "socials": [{"label": "@kinokonformistushka", "url": "https://t.me/kinokonformistushka"}]},
 ]
 
 PREVIEW_MAX = 2000        # px, longest edge of the slider preview (lightbox)
