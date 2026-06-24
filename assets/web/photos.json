@@ -3500,6 +3500,623 @@
           "original": "photos/ramil/orig/195.jpg"
         }
       ]
+    },
+    {
+      "slug": "savva",
+      "name": "Савва",
+      "socials": [
+        {
+          "label": "@Kowskyli",
+          "url": "https://t.me/Kowskyli"
+        }
+      ],
+      "photos": [
+        {
+          "thumb": "photos/savva/thumb/001.jpg",
+          "preview": "photos/savva/001.jpg",
+          "original": "photos/savva/orig/001.jpg"
+        },
+        {
+          "thumb": "photos/savva/thumb/034.jpg",
+          "preview": "photos/savva/034.jpg",
+          "original": "photos/savva/orig/034.jpg"
+        },
+        {
+          "thumb": "photos/savva/thumb/045.jpg",
+          "preview": "photos/savva/045.jpg",
+          "original": "photos/savva/orig/045.jpg"
+        },
+        {
+          "thumb": "photos/savva/thumb/056.jpg",
+          "preview": "photos/savva/056.jpg",
+          "original": "photos/savva/orig/056.jpg"
+        },
+        {
+          "thumb": "photos/savva/thumb/067.jpg",
+          "preview": "photos/savva/067.jpg",
+          "original": "photos/savva/orig/067.jpg"
+        },
+        {
+          "thumb": "photos/savva/thumb/078.jpg",
+          "preview": "photos/savva/078.jpg",
+          "original": "photos/savva/orig/078.jpg"
+        },
+        {
+          "thumb": "photos/savva/thumb/089.jpg",
+          "preview": "photos/savva/089.jpg",
+          "original": "photos/savva/orig/089.jpg"
+        },
+        {
+          "thumb": "photos/savva/thumb/100.jpg",
+          "preview": "photos/savva/100.jpg",
+          "original": "photos/savva/orig/100.jpg"
+        },
+        {
+          "thumb": "photos/savva/thumb/111.jpg",
+          "preview": "photos/savva/111.jpg",
+          "original": "photos/savva/orig/111.jpg"
+        },
+        {
+          "thumb": "photos/savva/thumb/002.jpg",
+          "preview": "photos/savva/002.jpg",
+          "original": "photos/savva/orig/002.jpg"
+        },
+        {
+          "thumb": "photos/savva/thumb/013.jpg",
+          "preview": "photos/savva/013.jpg",
+          "original": "photos/savva/orig/013.jpg"
+        },
+        {
+          "thumb": "photos/savva/thumb/024.jpg",
+          "preview": "photos/savva/024.jpg",
+          "original": "photos/savva/orig/024.jpg"
+        },
+        {
+          "thumb": "photos/savva/thumb/027.jpg",
+          "preview": "photos/savva/027.jpg",
+          "original": "photos/savva/orig/027.jpg"
+        },
+        {
+          "thumb": "photos/savva/thumb/028.jpg",
+          "preview": "photos/savva/028.jpg",
+          "original": "photos/savva/orig/028.jpg"
+        },
+        {
+          "thumb": "photos/savva/thumb/029.jpg",
+          "preview": "photos/savva/029.jpg",
+          "original": "photos/savva/orig/029.jpg"
+        },
+        {
+          "thumb": "photos/savva/thumb/030.jpg",
+          "preview": "photos/savva/030.jpg",
+          "original": "photos/savva/orig/030.jpg"
+        },
+        {
+          "thumb": "photos/savva/thumb/031.jpg",
+          "preview": "photos/savva/031.jpg",
+          "original": "photos/savva/orig/031.jpg"
+        },
+        {
+          "thumb": "photos/savva/thumb/032.jpg",
+          "preview": "photos/savva/032.jpg",
+          "original": "photos/savva/orig/032.jpg"
+        },
+        {
+          "thumb": "photos/savva/thumb/033.jpg",
+          "preview": "photos/savva/033.jpg",
+          "original": "photos/savva/orig/033.jpg"
+        },
+        {
+          "thumb": "photos/savva/thumb/035.jpg",
+          "preview": "photos/savva/035.jpg",
+          "original": "photos/savva/orig/035.jpg"
+        },
+        {
+          "thumb": "photos/savva/thumb/036.jpg",
+          "preview": "photos/savva/036.jpg",
+          "original": "photos/savva/orig/036.jpg"
+        },
+        {
+          "thumb": "photos/savva/thumb/037.jpg",
+          "preview": "photos/savva/037.jpg",
+          "original": "photos/savva/orig/037.jpg"
+        },
+        {
+          "thumb": "photos/savva/thumb/038.jpg",
+          "preview": "photos/savva/038.jpg",
+          "original": "photos/savva/orig/038.jpg"
+        },
+        {
+          "thumb": "photos/savva/thumb/039.jpg",
+          "preview": "photos/savva/039.jpg",
+          "original": "photos/savva/orig/039.jpg"
+        },
+        {
+          "thumb": "photos/savva/thumb/040.jpg",
+          "preview": "photos/savva/040.jpg",
+          "original": "photos/savva/orig/040.jpg"
+        },
+        {
+          "thumb": "photos/savva/thumb/041.jpg",
+          "preview": "photos/savva/041.jpg",
+          "original": "photos/savva/orig/041.jpg"
+        },
+        {
+          "thumb": "photos/savva/thumb/042.jpg",
+          "preview": "photos/savva/042.jpg",
+          "original": "photos/savva/orig/042.jpg"
+        },
+        {
+          "thumb": "photos/savva/thumb/043.jpg",
+          "preview": "photos/savva/043.jpg",
+          "original": "photos/savva/orig/043.jpg"
+        },
+        {
+          "thumb": "photos/savva/thumb/044.jpg",
+          "preview": "photos/savva/044.jpg",
+          "original": "photos/savva/orig/044.jpg"
+        },
+        {
+          "thumb": "photos/savva/thumb/046.jpg",
+          "preview": "photos/savva/046.jpg",
+          "original": "photos/savva/orig/046.jpg"
+        },
+        {
+          "thumb": "photos/savva/thumb/047.jpg",
+          "preview": "photos/savva/047.jpg",
+          "original": "photos/savva/orig/047.jpg"
+        },
+        {
+          "thumb": "photos/savva/thumb/048.jpg",
+          "preview": "photos/savva/048.jpg",
+          "original": "photos/savva/orig/048.jpg"
+        },
+        {
+          "thumb": "photos/savva/thumb/049.jpg",
+          "preview": "photos/savva/049.jpg",
+          "original": "photos/savva/orig/049.jpg"
+        },
+        {
+          "thumb": "photos/savva/thumb/050.jpg",
+          "preview": "photos/savva/050.jpg",
+          "original": "photos/savva/orig/050.jpg"
+        },
+        {
+          "thumb": "photos/savva/thumb/051.jpg",
+          "preview": "photos/savva/051.jpg",
+          "original": "photos/savva/orig/051.jpg"
+        },
+        {
+          "thumb": "photos/savva/thumb/052.jpg",
+          "preview": "photos/savva/052.jpg",
+          "original": "photos/savva/orig/052.jpg"
+        },
+        {
+          "thumb": "photos/savva/thumb/053.jpg",
+          "preview": "photos/savva/053.jpg",
+          "original": "photos/savva/orig/053.jpg"
+        },
+        {
+          "thumb": "photos/savva/thumb/054.jpg",
+          "preview": "photos/savva/054.jpg",
+          "original": "photos/savva/orig/054.jpg"
+        },
+        {
+          "thumb": "photos/savva/thumb/055.jpg",
+          "preview": "photos/savva/055.jpg",
+          "original": "photos/savva/orig/055.jpg"
+        },
+        {
+          "thumb": "photos/savva/thumb/057.jpg",
+          "preview": "photos/savva/057.jpg",
+          "original": "photos/savva/orig/057.jpg"
+        },
+        {
+          "thumb": "photos/savva/thumb/058.jpg",
+          "preview": "photos/savva/058.jpg",
+          "original": "photos/savva/orig/058.jpg"
+        },
+        {
+          "thumb": "photos/savva/thumb/059.jpg",
+          "preview": "photos/savva/059.jpg",
+          "original": "photos/savva/orig/059.jpg"
+        },
+        {
+          "thumb": "photos/savva/thumb/060.jpg",
+          "preview": "photos/savva/060.jpg",
+          "original": "photos/savva/orig/060.jpg"
+        },
+        {
+          "thumb": "photos/savva/thumb/061.jpg",
+          "preview": "photos/savva/061.jpg",
+          "original": "photos/savva/orig/061.jpg"
+        },
+        {
+          "thumb": "photos/savva/thumb/062.jpg",
+          "preview": "photos/savva/062.jpg",
+          "original": "photos/savva/orig/062.jpg"
+        },
+        {
+          "thumb": "photos/savva/thumb/063.jpg",
+          "preview": "photos/savva/063.jpg",
+          "original": "photos/savva/orig/063.jpg"
+        },
+        {
+          "thumb": "photos/savva/thumb/064.jpg",
+          "preview": "photos/savva/064.jpg",
+          "original": "photos/savva/orig/064.jpg"
+        },
+        {
+          "thumb": "photos/savva/thumb/065.jpg",
+          "preview": "photos/savva/065.jpg",
+          "original": "photos/savva/orig/065.jpg"
+        },
+        {
+          "thumb": "photos/savva/thumb/066.jpg",
+          "preview": "photos/savva/066.jpg",
+          "original": "photos/savva/orig/066.jpg"
+        },
+        {
+          "thumb": "photos/savva/thumb/068.jpg",
+          "preview": "photos/savva/068.jpg",
+          "original": "photos/savva/orig/068.jpg"
+        },
+        {
+          "thumb": "photos/savva/thumb/069.jpg",
+          "preview": "photos/savva/069.jpg",
+          "original": "photos/savva/orig/069.jpg"
+        },
+        {
+          "thumb": "photos/savva/thumb/070.jpg",
+          "preview": "photos/savva/070.jpg",
+          "original": "photos/savva/orig/070.jpg"
+        },
+        {
+          "thumb": "photos/savva/thumb/071.jpg",
+          "preview": "photos/savva/071.jpg",
+          "original": "photos/savva/orig/071.jpg"
+        },
+        {
+          "thumb": "photos/savva/thumb/072.jpg",
+          "preview": "photos/savva/072.jpg",
+          "original": "photos/savva/orig/072.jpg"
+        },
+        {
+          "thumb": "photos/savva/thumb/073.jpg",
+          "preview": "photos/savva/073.jpg",
+          "original": "photos/savva/orig/073.jpg"
+        },
+        {
+          "thumb": "photos/savva/thumb/074.jpg",
+          "preview": "photos/savva/074.jpg",
+          "original": "photos/savva/orig/074.jpg"
+        },
+        {
+          "thumb": "photos/savva/thumb/075.jpg",
+          "preview": "photos/savva/075.jpg",
+          "original": "photos/savva/orig/075.jpg"
+        },
+        {
+          "thumb": "photos/savva/thumb/076.jpg",
+          "preview": "photos/savva/076.jpg",
+          "original": "photos/savva/orig/076.jpg"
+        },
+        {
+          "thumb": "photos/savva/thumb/077.jpg",
+          "preview": "photos/savva/077.jpg",
+          "original": "photos/savva/orig/077.jpg"
+        },
+        {
+          "thumb": "photos/savva/thumb/079.jpg",
+          "preview": "photos/savva/079.jpg",
+          "original": "photos/savva/orig/079.jpg"
+        },
+        {
+          "thumb": "photos/savva/thumb/080.jpg",
+          "preview": "photos/savva/080.jpg",
+          "original": "photos/savva/orig/080.jpg"
+        },
+        {
+          "thumb": "photos/savva/thumb/081.jpg",
+          "preview": "photos/savva/081.jpg",
+          "original": "photos/savva/orig/081.jpg"
+        },
+        {
+          "thumb": "photos/savva/thumb/082.jpg",
+          "preview": "photos/savva/082.jpg",
+          "original": "photos/savva/orig/082.jpg"
+        },
+        {
+          "thumb": "photos/savva/thumb/083.jpg",
+          "preview": "photos/savva/083.jpg",
+          "original": "photos/savva/orig/083.jpg"
+        },
+        {
+          "thumb": "photos/savva/thumb/084.jpg",
+          "preview": "photos/savva/084.jpg",
+          "original": "photos/savva/orig/084.jpg"
+        },
+        {
+          "thumb": "photos/savva/thumb/085.jpg",
+          "preview": "photos/savva/085.jpg",
+          "original": "photos/savva/orig/085.jpg"
+        },
+        {
+          "thumb": "photos/savva/thumb/086.jpg",
+          "preview": "photos/savva/086.jpg",
+          "original": "photos/savva/orig/086.jpg"
+        },
+        {
+          "thumb": "photos/savva/thumb/087.jpg",
+          "preview": "photos/savva/087.jpg",
+          "original": "photos/savva/orig/087.jpg"
+        },
+        {
+          "thumb": "photos/savva/thumb/088.jpg",
+          "preview": "photos/savva/088.jpg",
+          "original": "photos/savva/orig/088.jpg"
+        },
+        {
+          "thumb": "photos/savva/thumb/090.jpg",
+          "preview": "photos/savva/090.jpg",
+          "original": "photos/savva/orig/090.jpg"
+        },
+        {
+          "thumb": "photos/savva/thumb/091.jpg",
+          "preview": "photos/savva/091.jpg",
+          "original": "photos/savva/orig/091.jpg"
+        },
+        {
+          "thumb": "photos/savva/thumb/092.jpg",
+          "preview": "photos/savva/092.jpg",
+          "original": "photos/savva/orig/092.jpg"
+        },
+        {
+          "thumb": "photos/savva/thumb/093.jpg",
+          "preview": "photos/savva/093.jpg",
+          "original": "photos/savva/orig/093.jpg"
+        },
+        {
+          "thumb": "photos/savva/thumb/094.jpg",
+          "preview": "photos/savva/094.jpg",
+          "original": "photos/savva/orig/094.jpg"
+        },
+        {
+          "thumb": "photos/savva/thumb/095.jpg",
+          "preview": "photos/savva/095.jpg",
+          "original": "photos/savva/orig/095.jpg"
+        },
+        {
+          "thumb": "photos/savva/thumb/096.jpg",
+          "preview": "photos/savva/096.jpg",
+          "original": "photos/savva/orig/096.jpg"
+        },
+        {
+          "thumb": "photos/savva/thumb/097.jpg",
+          "preview": "photos/savva/097.jpg",
+          "original": "photos/savva/orig/097.jpg"
+        },
+        {
+          "thumb": "photos/savva/thumb/098.jpg",
+          "preview": "photos/savva/098.jpg",
+          "original": "photos/savva/orig/098.jpg"
+        },
+        {
+          "thumb": "photos/savva/thumb/099.jpg",
+          "preview": "photos/savva/099.jpg",
+          "original": "photos/savva/orig/099.jpg"
+        },
+        {
+          "thumb": "photos/savva/thumb/101.jpg",
+          "preview": "photos/savva/101.jpg",
+          "original": "photos/savva/orig/101.jpg"
+        },
+        {
+          "thumb": "photos/savva/thumb/102.jpg",
+          "preview": "photos/savva/102.jpg",
+          "original": "photos/savva/orig/102.jpg"
+        },
+        {
+          "thumb": "photos/savva/thumb/103.jpg",
+          "preview": "photos/savva/103.jpg",
+          "original": "photos/savva/orig/103.jpg"
+        },
+        {
+          "thumb": "photos/savva/thumb/104.jpg",
+          "preview": "photos/savva/104.jpg",
+          "original": "photos/savva/orig/104.jpg"
+        },
+        {
+          "thumb": "photos/savva/thumb/105.jpg",
+          "preview": "photos/savva/105.jpg",
+          "original": "photos/savva/orig/105.jpg"
+        },
+        {
+          "thumb": "photos/savva/thumb/106.jpg",
+          "preview": "photos/savva/106.jpg",
+          "original": "photos/savva/orig/106.jpg"
+        },
+        {
+          "thumb": "photos/savva/thumb/107.jpg",
+          "preview": "photos/savva/107.jpg",
+          "original": "photos/savva/orig/107.jpg"
+        },
+        {
+          "thumb": "photos/savva/thumb/108.jpg",
+          "preview": "photos/savva/108.jpg",
+          "original": "photos/savva/orig/108.jpg"
+        },
+        {
+          "thumb": "photos/savva/thumb/109.jpg",
+          "preview": "photos/savva/109.jpg",
+          "original": "photos/savva/orig/109.jpg"
+        },
+        {
+          "thumb": "photos/savva/thumb/110.jpg",
+          "preview": "photos/savva/110.jpg",
+          "original": "photos/savva/orig/110.jpg"
+        },
+        {
+          "thumb": "photos/savva/thumb/112.jpg",
+          "preview": "photos/savva/112.jpg",
+          "original": "photos/savva/orig/112.jpg"
+        },
+        {
+          "thumb": "photos/savva/thumb/113.jpg",
+          "preview": "photos/savva/113.jpg",
+          "original": "photos/savva/orig/113.jpg"
+        },
+        {
+          "thumb": "photos/savva/thumb/114.jpg",
+          "preview": "photos/savva/114.jpg",
+          "original": "photos/savva/orig/114.jpg"
+        },
+        {
+          "thumb": "photos/savva/thumb/115.jpg",
+          "preview": "photos/savva/115.jpg",
+          "original": "photos/savva/orig/115.jpg"
+        },
+        {
+          "thumb": "photos/savva/thumb/116.jpg",
+          "preview": "photos/savva/116.jpg",
+          "original": "photos/savva/orig/116.jpg"
+        },
+        {
+          "thumb": "photos/savva/thumb/117.jpg",
+          "preview": "photos/savva/117.jpg",
+          "original": "photos/savva/orig/117.jpg"
+        },
+        {
+          "thumb": "photos/savva/thumb/118.jpg",
+          "preview": "photos/savva/118.jpg",
+          "original": "photos/savva/orig/118.jpg"
+        },
+        {
+          "thumb": "photos/savva/thumb/119.jpg",
+          "preview": "photos/savva/119.jpg",
+          "original": "photos/savva/orig/119.jpg"
+        },
+        {
+          "thumb": "photos/savva/thumb/120.jpg",
+          "preview": "photos/savva/120.jpg",
+          "original": "photos/savva/orig/120.jpg"
+        },
+        {
+          "thumb": "photos/savva/thumb/121.jpg",
+          "preview": "photos/savva/121.jpg",
+          "original": "photos/savva/orig/121.jpg"
+        },
+        {
+          "thumb": "photos/savva/thumb/003.jpg",
+          "preview": "photos/savva/003.jpg",
+          "original": "photos/savva/orig/003.jpg"
+        },
+        {
+          "thumb": "photos/savva/thumb/004.jpg",
+          "preview": "photos/savva/004.jpg",
+          "original": "photos/savva/orig/004.jpg"
+        },
+        {
+          "thumb": "photos/savva/thumb/005.jpg",
+          "preview": "photos/savva/005.jpg",
+          "original": "photos/savva/orig/005.jpg"
+        },
+        {
+          "thumb": "photos/savva/thumb/006.jpg",
+          "preview": "photos/savva/006.jpg",
+          "original": "photos/savva/orig/006.jpg"
+        },
+        {
+          "thumb": "photos/savva/thumb/007.jpg",
+          "preview": "photos/savva/007.jpg",
+          "original": "photos/savva/orig/007.jpg"
+        },
+        {
+          "thumb": "photos/savva/thumb/008.jpg",
+          "preview": "photos/savva/008.jpg",
+          "original": "photos/savva/orig/008.jpg"
+        },
+        {
+          "thumb": "photos/savva/thumb/009.jpg",
+          "preview": "photos/savva/009.jpg",
+          "original": "photos/savva/orig/009.jpg"
+        },
+        {
+          "thumb": "photos/savva/thumb/010.jpg",
+          "preview": "photos/savva/010.jpg",
+          "original": "photos/savva/orig/010.jpg"
+        },
+        {
+          "thumb": "photos/savva/thumb/011.jpg",
+          "preview": "photos/savva/011.jpg",
+          "original": "photos/savva/orig/011.jpg"
+        },
+        {
+          "thumb": "photos/savva/thumb/012.jpg",
+          "preview": "photos/savva/012.jpg",
+          "original": "photos/savva/orig/012.jpg"
+        },
+        {
+          "thumb": "photos/savva/thumb/014.jpg",
+          "preview": "photos/savva/014.jpg",
+          "original": "photos/savva/orig/014.jpg"
+        },
+        {
+          "thumb": "photos/savva/thumb/015.jpg",
+          "preview": "photos/savva/015.jpg",
+          "original": "photos/savva/orig/015.jpg"
+        },
+        {
+          "thumb": "photos/savva/thumb/016.jpg",
+          "preview": "photos/savva/016.jpg",
+          "original": "photos/savva/orig/016.jpg"
+        },
+        {
+          "thumb": "photos/savva/thumb/017.jpg",
+          "preview": "photos/savva/017.jpg",
+          "original": "photos/savva/orig/017.jpg"
+        },
+        {
+          "thumb": "photos/savva/thumb/018.jpg",
+          "preview": "photos/savva/018.jpg",
+          "original": "photos/savva/orig/018.jpg"
+        },
+        {
+          "thumb": "photos/savva/thumb/019.jpg",
+          "preview": "photos/savva/019.jpg",
+          "original": "photos/savva/orig/019.jpg"
+        },
+        {
+          "thumb": "photos/savva/thumb/020.jpg",
+          "preview": "photos/savva/020.jpg",
+          "original": "photos/savva/orig/020.jpg"
+        },
+        {
+          "thumb": "photos/savva/thumb/021.jpg",
+          "preview": "photos/savva/021.jpg",
+          "original": "photos/savva/orig/021.jpg"
+        },
+        {
+          "thumb": "photos/savva/thumb/022.jpg",
+          "preview": "photos/savva/022.jpg",
+          "original": "photos/savva/orig/022.jpg"
+        },
+        {
+          "thumb": "photos/savva/thumb/023.jpg",
+          "preview": "photos/savva/023.jpg",
+          "original": "photos/savva/orig/023.jpg"
+        },
+        {
+          "thumb": "photos/savva/thumb/025.jpg",
+          "preview": "photos/savva/025.jpg",
+          "original": "photos/savva/orig/025.jpg"
+        },
+        {
+          "thumb": "photos/savva/thumb/026.jpg",
+          "preview": "photos/savva/026.jpg",
+          "original": "photos/savva/orig/026.jpg"
+        }
+      ]
     }
   ]
 }
